@@ -1,0 +1,25 @@
+{
+  "name": "devtools-game",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "watch:client": "esbuild src/client/main.ts --outfile=../dist/client.js --bundle --watch --format=cjs",
+    "watch:server": "esbuild src/server/main.ts --outfile=../dist/server.js --bundle --watch --format=cjs --platform=node",
+    "watch": "concurrently --names \"client,server\" \"yarn run watch:client\" \"yarn run watch:server\"",
+    "start": "yarn run watch",
+    "build:client": "esbuild src/client/main.ts --outfile=../dist/client.js --bundle --minify --format=cjs",
+    "build:server": "esbuild src/server/main.ts --outfile=../dist/server.js --bundle --minify --format=cjs --platform=node",
+    "build": "concurrently --names \"client,server\" \"yarn run build:client\" \"yarn run build:server\""
+  },
+  "devDependencies": {
+    "@citizenfx/client": "^2.0.5801-1",
+    "@citizenfx/server": "^2.0.5801-1",
+    "@types/node": "^18.7.1",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "concurrently": "^7.3.0",
+    "esbuild": "^0.15.1",
+    "eslint": "^8.21.0",
+    "typescript": "^4.7.4"
+  }
+}

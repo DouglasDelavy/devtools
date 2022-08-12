@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "moduleResolution": "Node",
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "types": ["@types/node", "@citizenfx/client"]
+  },
+  "include": ["./"]
+}

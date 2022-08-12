@@ -1,0 +1,10 @@
+{
+  "name": "devtools",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build:game": "cd game && npm install && npm run build",
+    "build": "npm run build:game"
+  }
+}
