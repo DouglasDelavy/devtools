@@ -5,6 +5,10 @@
   "license": "MIT",
   "scripts": {
     "build:game": "cd game && npm install && npm run build",
-    "build": "npm run build:game"
+    "build:web": "cd web && npm install && npm run build",
+    "build": "npm run build:game && npm run build:web",
+    "watch:game": "cd game && npm run watch",
+    "watch:web": "cd web && npm run dev",
+    "watch": "npm run watch:game && npm run watch:web"
   }
 }
