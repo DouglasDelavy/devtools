@@ -2,10 +2,13 @@ import React from 'react';
 
 import { isDevelopment } from './lib/env';
 import { Events } from './lib/events';
+import { fetchNui } from './lib/nui';
 
 import { resources, initialResources } from './resources';
 
-const App = () => {
+import './styles/index.scss';
+
+export const App = () => {
   const [renderedResources, setRenderedResources] = React.useState<BaseResource[]>(
     isDevelopment() ? initialResources : [],
   );
@@ -15,9 +18,7 @@ const App = () => {
     if (!resource) return;
 
     if (render) {
-      if (renderedResources.includes(resource)) return;
-
-      setRenderedResources(prevResources => [...prevResources, resource]);
+      setRenderedResources(prevResources => [...prevResources.filter(x => x.name !== name), resource]);
     } else {
       setRenderedResources(resources.filter(x => x.name !== name));
     }
@@ -26,6 +27,8 @@ const App = () => {
   React.useEffect(() => {
     Events.on('renderResource', onRenderResource);
 
+    fetchNui('ui:loaded').catch(console.error);
+
     return () => {
       Events.off('renderResource', onRenderResource);
     };
@@ -33,11 +36,15 @@ const App = () => {
 
   return (
     <>
-      {renderedResources.map(({ name, component: Component }) => (
-        <Component key={name} />
-      ))}
+      <div
+        className={`w-screen h-screen ${
+          isDevelopment() ? "bg-[url('../assets/images/background.jpg')] bg-cover bg-center" : ''
+        } `}
+      >
+        {renderedResources.map(({ name, component: Component }) => (
+          <Component key={name} />
+        ))}
+      </div>
     </>
   );
 };
-
-export default App;

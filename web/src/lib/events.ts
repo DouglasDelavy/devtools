@@ -29,8 +29,19 @@ const emit = (type: string, ...payload: unknown[]): void => {
   window.dispatchEvent(event);
 };
 
+const listener = (e: MessageEvent): void => {
+  const type = e.data.type;
+  const payload = e.data.payload;
+
+  const handlers = _events[type];
+  if (!handlers) return;
+
+  handlers.forEach(fn => fn(...payload));
+};
+
 export const Events = {
   on,
   off,
   emit,
+  listener,
 };

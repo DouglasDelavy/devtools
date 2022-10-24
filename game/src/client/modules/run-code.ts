@@ -8,27 +8,25 @@ const run = (snippet: string): unknown => {
   }
 };
 
-const start = (): void => {
-  RegisterCommand(
-    'crun',
-    (source: number, args: string[], raw: string) => {
-      const snippet = raw.substring(5, raw.length);
-      const result = run(snippet);
+const command = (source: number, args: string[], raw: string): void => {
+  const snippet = raw.substring(5, raw.length);
+  const result = run(snippet);
 
-      console.log(result);
-    },
-    false,
-  );
+  console.log(result);
+};
+
+const start = (): void => {
+  RegisterCommand('crun', command, false);
 
   Log.debug(`[RUNCODE] module started`);
 };
 
-const destroy = (): void => {
+const shutdown = (): void => {
   Log.debug(`[RUNCODE] module destroyed`);
 };
 
 export const RunCode = {
   run,
   start,
-  destroy,
+  shutdown,
 };
