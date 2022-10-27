@@ -1,4 +1,5 @@
 import { Debugger } from './modules/debugger';
+import { Menu } from './modules/menu';
 import { RunCode } from './modules/run-code';
 import { UI } from './modules/ui';
 
@@ -11,6 +12,7 @@ setTimeout(() => {
 
   Debugger.start();
   RunCode.start();
+  Menu.start();
 
   _tick = setTick(() => {
     Debugger.tick();
@@ -28,4 +30,5 @@ on('onResourceStop', (resourceName: string) => {
   UI.shutdown();
   RunCode.shutdown();
   Debugger.shutdown();
+  Menu.shutdown();
 });

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Events } from '../../lib/events';
+import { Events } from '@lib/events';
 
 export default function Debugger() {
   const [data, setData] = useState<Record<string, any>>({});
@@ -19,7 +19,7 @@ export default function Debugger() {
   return (
     <div className="p-2 flex gap-[2px]">
       {Object.entries(data)?.map(([key, value]) => (
-        <ul key={key} className="text-[10px] px-2 text-center bg-black text-white bg-opacity-60">
+        <ul key={key} className="text-[10px] px-2 text-center bg-neutral-900 text-white bg-opacity-70">
           <li className="font-bold border-solid">{key}</li>
           <li>{value}</li>
         </ul>

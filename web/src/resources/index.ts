@@ -1,4 +1,5 @@
 import { Debugger } from './debugger';
+import { Menu } from './menu';
 
-export const initialResources = [Debugger];
-export const resources: BaseResource[] = [Debugger];
+export const initialResources = [Debugger, Menu];
+export const resources: BaseResource[] = [Debugger, Menu];
