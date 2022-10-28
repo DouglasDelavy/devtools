@@ -1,20 +1,22 @@
 import { useMenuContext } from '../../context';
+import { routes } from '../../routes';
 
 import { Header } from '../header';
+import { SideBar } from '../sidebar';
 
 export const Menu = () => {
-  const { minimized } = useMenuContext();
+  const { minimized, path } = useMenuContext();
+
+  const Component = routes.find(route => route.path === path)?.component;
 
   return (
-    <div className={`bg-neutral-900 ${minimized ? 'w-1/4' : 'w-full'} h-full text-white flex flex-col`}>
+    <div className={`h-full ${minimized ? 'w-1/4' : 'w-full'} flex flex-col duration-300 bg-neutral-900 text-white `}>
       <Header />
 
       <section className="flex flex-auto">
-        <aside className="w-1/6 bg-neutral-800"></aside>
+        <SideBar minimized={minimized} />
 
-        <main className="flex-1 p-2w">
-          <h1>Player</h1>
-        </main>
+        <main className="w-full h-full">{Component && <Component />}</main>
       </section>
     </div>
   );
