@@ -2,6 +2,7 @@ import { Debugger } from './modules/debugger';
 import { Menu } from './modules/menu';
 import { RunCode } from './modules/run-code';
 import { UI } from './modules/ui';
+import { Animation } from './modules/animation';
 
 const RESOURCE_NAME = GetCurrentResourceName();
 
@@ -13,6 +14,7 @@ setTimeout(() => {
   Debugger.start();
   RunCode.start();
   Menu.start();
+  Animation.start();
 
   _tick = setTick(() => {
     Debugger.tick();
@@ -31,4 +33,5 @@ on('onResourceStop', (resourceName: string) => {
   RunCode.shutdown();
   Debugger.shutdown();
   Menu.shutdown();
+  Animation.shutdown();
 });

@@ -2,10 +2,10 @@ import { useMenuContext } from '../../context';
 import { routes } from '../../routes';
 
 type SideBarProps = {
-  minimized: boolean;
+  maximized: boolean;
 };
 
-export const SideBar = ({ minimized }: SideBarProps) => {
+export const SideBar = ({ maximized }: SideBarProps) => {
   const { setPath } = useMenuContext();
 
   const handleChangePath = (path: string): void => {
@@ -19,11 +19,11 @@ export const SideBar = ({ minimized }: SideBarProps) => {
           key={path}
           onClick={() => handleChangePath(path)}
           className={`w-full px-2 py-2 flex items-center ${
-            minimized && 'justify-center'
+            maximized && 'justify-center'
           } gap-2 cursor-pointer text-neutral-300 bg-neutral-800 hover:bg-neutral-700 hover:text-white`}
         >
           <Icon className="w-5 h-5" />
-          {!minimized && <p>{label}</p>}
+          {!maximized && <p>{label}</p>}
         </div>
       ))}
     </aside>

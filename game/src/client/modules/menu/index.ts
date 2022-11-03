@@ -6,6 +6,8 @@ const UI_COMPONENT_NAME = 'menu';
 
 let _displaying: boolean;
 
+const getPlayerPedId = (): number => PlayerPedId();
+
 const display = (): void => {
   if (_displaying) return;
 
@@ -28,10 +30,17 @@ const toggle = (): void => {
   _displaying ? hide() : display();
 };
 
+const minimize = (state: boolean): void => {
+  UI.focus(true, true, state);
+};
+
 const start = (): void => {
   _displaying = false;
 
   UI.register('menu:close', hide);
+  UI.register('menu:minimize', minimize);
+
+  UI.register('menu:playerPedId', getPlayerPedId);
 
   RegisterCommand('menu', toggle, false);
 

@@ -1,8 +1,12 @@
+import { fetchNui } from '@lib/nui';
 import { createContext, ReactNode, useContext, useState } from 'react';
 
 type MenuContextData = {
-  minimized: boolean;
-  toggleMinimized: () => void;
+  maximize: boolean;
+  toggleMinimize: () => void;
+
+  minimize: boolean;
+  toggleMaximize: () => void;
 
   path: string | undefined;
   setPath: (path: string) => void;
@@ -19,12 +23,25 @@ export const useMenuContext = (): MenuContextData => {
 };
 
 export const MenuContextProvider = ({ children }: MenuContextProviderProps) => {
-  const [minimized, setMinimized] = useState(true);
+  const [maximize, setMaximize] = useState(true);
+  const [minimize, setMinimize] = useState(false);
+
   const [path, setPath] = useState<string>();
 
-  const toggleMinimized = (): void => {
-    setMinimized(state => !state);
+  const toggleMinimize = (): void => {
+    const state = !minimize;
+
+    setMinimize(state);
+    fetchNui('menu:minimize', state).catch(console.error);
   };
 
-  return <MenuContext.Provider value={{ minimized, toggleMinimized, path, setPath }}>{children}</MenuContext.Provider>;
+  const toggleMaximize = (): void => {
+    setMaximize(state => !state);
+  };
+
+  return (
+    <MenuContext.Provider value={{ maximize, toggleMaximize, minimize, toggleMinimize, path, setPath }}>
+      {children}
+    </MenuContext.Provider>
+  );
 };
