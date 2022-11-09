@@ -11,16 +11,16 @@ export const Menu = () => {
 
   return (
     <div
-      className={`h-full ${maximize ? 'w-1/4' : 'w-full'} flex flex-col duration-300 bg-neutral-900 text-white ${
+      className={`h-full ${maximize ? 'w-1/4' : 'w-full'} flex-col flex duration-300 bg-neutral-900 text-white ${
         minimize ? 'opacity-50' : 'opacity-100'
       }`}
     >
       <Header />
 
-      <section className="flex flex-auto">
+      <section className="flex flex-row flex-grow overflow-auto">
         <SideBar maximized={maximize} />
 
-        <main className="w-full h-full">{Component && <Component />}</main>
+        <main className="w-[calc(100%-16.666667%)] h-full flex flex-col p-2">{Component && <Component />}</main>
       </section>
     </div>
   );

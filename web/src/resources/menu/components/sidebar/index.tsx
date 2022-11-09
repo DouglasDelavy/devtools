@@ -13,7 +13,7 @@ export const SideBar = ({ maximized }: SideBarProps) => {
   };
 
   return (
-    <aside className="w-1/6 bg-neutral-800 p-2">
+    <aside className="w-1/6 h-full flex flex-col bg-neutral-800 p-2">
       {routes.map(({ path, label, icon: Icon }) => (
         <div
           key={path}

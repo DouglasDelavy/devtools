@@ -1,4 +1,5 @@
 import { Log } from '../utils/logger';
+import { UI } from './ui';
 
 const run = (snippet: string): unknown => {
   try {
@@ -17,6 +18,7 @@ const command = (source: number, args: string[], raw: string): void => {
 
 const start = (): void => {
   RegisterCommand('crun', command, false);
+  UI.register('console:run', run);
 
   Log.debug(`[RUNCODE] module started`);
 };

@@ -106,7 +106,7 @@ export const AnimationScreen = () => {
   };
 
   return (
-    <section className="w-full h-full p-2 flex flex-col justify-between gap-2">
+    <section className="w-full h-full flex flex-col justify-between gap-2">
       <div className="flex flex-col gap-2">
         <SearchInput placeholder="Search" value={search} onChange={handleChangeSearch} />
 
