@@ -1,7 +1,9 @@
 import { WorldDensity } from './density';
+import { WorldWeather } from './weather';
 
 const start = (): void => {
   WorldDensity.start();
+  WorldWeather.start();
 };
 
 const tick = (): void => {
@@ -10,6 +12,7 @@ const tick = (): void => {
 
 const shutdown = (): void => {
   WorldDensity.shutdown();
+  WorldWeather.shutdown();
 };
 
 export const World = {

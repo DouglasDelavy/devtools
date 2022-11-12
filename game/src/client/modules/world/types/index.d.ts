@@ -6,4 +6,9 @@ declare namespace World {
     vehicle: number;
     scenarioPed: number;
   };
+
+  type Weather = {
+    weatherType: string;
+    transitionTimeInSeconds: number;
+  };
 }
