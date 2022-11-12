@@ -16,7 +16,7 @@ type MenuContextProviderProps = {
   children: ReactNode;
 };
 
-export const MenuContext = createContext({} as MenuContextData);
+const MenuContext = createContext({} as MenuContextData);
 
 export const useMenuContext = (): MenuContextData => {
   return useContext(MenuContext);

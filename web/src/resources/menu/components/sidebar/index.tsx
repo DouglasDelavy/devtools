@@ -6,7 +6,7 @@ type SideBarProps = {
 };
 
 export const SideBar = ({ maximized }: SideBarProps) => {
-  const { setPath } = useMenuContext();
+  const { path: currentPath, setPath } = useMenuContext();
 
   const handleChangePath = (path: string): void => {
     setPath(path);
@@ -18,9 +18,9 @@ export const SideBar = ({ maximized }: SideBarProps) => {
         <div
           key={path}
           onClick={() => handleChangePath(path)}
-          className={`w-full px-2 py-2 flex items-center ${
-            maximized && 'justify-center'
-          } gap-2 cursor-pointer text-neutral-300 bg-neutral-800 hover:bg-neutral-700 hover:text-white`}
+          className={`w-full px-2 py-2 flex items-center ${maximized && 'justify-center'} gap-2 cursor-pointer  ${
+            path === currentPath ? 'bg-neutral-700 text-white' : 'text-neutral-300 bg-neutral-800'
+          } hover:bg-neutral-700 hover:text-white`}
         >
           <Icon className="w-5 h-5" />
           {!maximized && <p>{label}</p>}
