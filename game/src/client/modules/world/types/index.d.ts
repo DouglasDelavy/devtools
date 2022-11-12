@@ -11,4 +11,10 @@ declare namespace World {
     weatherType: string;
     transitionTimeInSeconds: number;
   };
+
+  type ClockTime = {
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
 }
