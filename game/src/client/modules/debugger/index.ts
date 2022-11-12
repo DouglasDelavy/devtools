@@ -26,6 +26,9 @@ const update = (): void => {
   const playerPedPos = GetEntityCoords(playerPed, false);
   const playerPedRot = GetEntityRotation(playerPed, 2);
 
+  const gameTimer = GetGameTimer();
+  const frameCount = GetFrameCount();
+
   UI.emit('debugger:data', {
     health: playerPedHealth,
     armor: playerPedArmor,
@@ -35,6 +38,8 @@ const update = (): void => {
     weapon: playerPedWeapon,
     position: formatVec3(playerPedPos),
     rotation: formatVec3(playerPedRot),
+    game_timer: gameTimer,
+    frame_count: frameCount,
   });
 };
 
