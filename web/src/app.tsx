@@ -20,7 +20,7 @@ export const App = () => {
     if (render) {
       setRenderedResources(prevResources => [...prevResources.filter(x => x.name !== name), resource]);
     } else {
-      setRenderedResources(resources.filter(x => x.name !== name));
+      setRenderedResources(prev => [...prev.filter(x => x.name !== name)]);
     }
   };
 
