@@ -1,9 +1,9 @@
-import { Log } from '../../utils/logger';
-
-import { UI } from '../ui';
+import { Log } from '@modules/logger';
+import { UI } from '@modules/ui';
+import { Settings } from '@modules/settings';
 
 const UI_RESOURCE_NAME = 'debugger';
-const KVP_RESOURCE_KEY = 'cl_debugger';
+const KVP_RESOURCE_KEY = 'debugger';
 
 let _displaying: boolean;
 
@@ -49,8 +49,7 @@ const hide = (): void => {
   _displaying = false;
 
   UI.hide(UI_RESOURCE_NAME);
-
-  SetResourceKvpInt(KVP_RESOURCE_KEY, Number(_displaying));
+  Settings.setBool(KVP_RESOURCE_KEY, _displaying);
 
   Log.debug(`[DEBUGGER] hide UI`);
 };
@@ -61,8 +60,7 @@ const display = (): void => {
   _displaying = true;
 
   UI.display(UI_RESOURCE_NAME);
-
-  SetResourceKvpInt(KVP_RESOURCE_KEY, Number(_displaying));
+  Settings.setBool(KVP_RESOURCE_KEY, _displaying);
 
   Log.debug(`[DEBUGGER] display UI`);
 };
@@ -78,7 +76,7 @@ const onUILoaded = (): void => {
 };
 
 const start = (): void => {
-  _displaying = Boolean(GetResourceKvpInt(KVP_RESOURCE_KEY));
+  _displaying = Settings.getBool(KVP_RESOURCE_KEY);
 
   RegisterCommand('cl_debugger', command, false);
 

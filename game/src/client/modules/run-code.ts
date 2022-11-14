@@ -1,5 +1,5 @@
-import { Log } from '../utils/logger';
-import { UI } from './ui';
+import { Log } from '@modules/logger';
+import { UI } from 'modules/ui';
 
 const run = (snippet: string): unknown => {
   try {

@@ -1,6 +1,5 @@
-import { Log } from '../../utils/logger';
-
-import { UI } from '../ui';
+import { Log } from '@modules/logger';
+import { UI } from '@modules/ui';
 
 const UI_COMPONENT_NAME = 'menu';
 
