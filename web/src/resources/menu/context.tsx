@@ -1,5 +1,8 @@
+import { useLocalStorage } from '@lib/hooks/local-storage';
 import { fetchNui } from '@lib/nui';
 import { createContext, ReactNode, useContext, useState } from 'react';
+
+const MENU_MAXIMIZE_STORAGE_KEY = 'menu:maximize';
 
 type MenuContextData = {
   maximize: boolean;
@@ -25,7 +28,7 @@ export const useMenuContext = (): MenuContextData => {
 };
 
 export const MenuContextProvider = ({ children }: MenuContextProviderProps) => {
-  const [maximize, setMaximize] = useState(true);
+  const [maximize, setMaximize] = useLocalStorage(MENU_MAXIMIZE_STORAGE_KEY, true);
   const [minimize, setMinimize] = useState(false);
 
   const [path, setPath] = useState<string>();
