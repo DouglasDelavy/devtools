@@ -8,6 +8,8 @@ type MenuContextData = {
   minimize: boolean;
   toggleMaximize: () => void;
 
+  handleClose: () => void;
+
   path: string | undefined;
   setPath: (path: string) => void;
 };
@@ -39,8 +41,12 @@ export const MenuContextProvider = ({ children }: MenuContextProviderProps) => {
     setMaximize(state => !state);
   };
 
+  const handleClose = (): void => {
+    fetchNui('menu:close').catch(console.error);
+  };
+
   return (
-    <MenuContext.Provider value={{ maximize, toggleMaximize, minimize, toggleMinimize, path, setPath }}>
+    <MenuContext.Provider value={{ maximize, toggleMaximize, minimize, toggleMinimize, handleClose, path, setPath }}>
       {children}
     </MenuContext.Provider>
   );

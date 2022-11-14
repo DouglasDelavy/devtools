@@ -1,13 +1,30 @@
+import { useEffect } from 'react';
 import { useMenuContext } from '../../context';
 import { routes } from '../../routes';
 
 import { Header } from '../header';
 import { SideBar } from '../sidebar';
 
+const CLOSE_KEYS = ['Escape'];
+
 export const Menu = () => {
-  const { maximize, minimize, path } = useMenuContext();
+  const { handleClose, maximize, minimize, path } = useMenuContext();
 
   const Component = routes.find(route => route.path === path)?.component;
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent): void => {
+      if (!CLOSE_KEYS.includes(event.key)) return;
+
+      handleClose();
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, []);
 
   return (
     <div
