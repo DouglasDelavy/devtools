@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { fetchFile, fetchNui } from '@lib/nui';
 
@@ -36,22 +36,22 @@ export const AnimationScreen = () => {
       .catch(console.error);
   }, []);
 
-  const getAnimationDictionaries = () => {
+  const dictionaries = useMemo(() => {
     if (!animations) return [];
 
     return animations
       .filter(animation => animation.dictionaryName.includes(search))
       .map(animation => ({ value: animation.dictionaryName, label: animation.dictionaryName }));
-  };
+  }, [animations, search]);
 
-  const getAnimationNames = () => {
+  const names = useMemo(() => {
     if (!animations || !dictionary) return [];
 
     const animation = animations.find(animation => animation.dictionaryName === dictionary);
     if (!animation) return [];
 
     return animation.animations.map(name => ({ value: name, label: name }));
-  };
+  }, [animations, dictionary]);
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(e.target.value);
@@ -110,13 +110,8 @@ export const AnimationScreen = () => {
       <div className="flex flex-col gap-2">
         <SearchInput placeholder="Search" value={search} onChange={handleChangeSearch} />
 
-        <Select
-          label="Dictionary"
-          name="dictionary"
-          options={getAnimationDictionaries()}
-          onChange={handleChangeDictionary}
-        />
-        <Select label="Name" name="name" options={getAnimationNames()} onChange={handleChangeName} />
+        <Select label="Dictionary" name="dictionary" options={dictionaries} onChange={handleChangeDictionary} />
+        <Select label="Name" name="name" options={names} onChange={handleChangeName} />
 
         <Input type="number" label="Entity" placeholder="Entity Id" value={entity} onChange={handleChangeEntity} />
 
@@ -163,7 +158,10 @@ export const AnimationScreen = () => {
         </div>
       </div>
 
-      <TextArea rows={7} value={JSON.stringify({ name, dictionary, blendInSpeed, blendOutSpeed, flags }, null, 4)} />
+      <TextArea
+        rows={7}
+        defaultValue={JSON.stringify({ name, dictionary, blendInSpeed, blendOutSpeed, flags }, null, 4)}
+      />
     </section>
   );
 };
