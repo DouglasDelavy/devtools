@@ -10,6 +10,7 @@ const start = (): void => {
 
 const tick = (): void => {
   WorldDensity.tick();
+  WorldTime.tick();
 };
 
 const shutdown = (): void => {
