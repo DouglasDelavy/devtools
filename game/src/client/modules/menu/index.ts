@@ -1,5 +1,7 @@
 import { Log } from '@modules/logger';
 import { UI } from '@modules/ui';
+import { Permission } from '@modules/permission';
+import { PERMISSIONS } from '@shared/permission';
 
 const UI_COMPONENT_NAME = 'menu';
 
@@ -9,6 +11,8 @@ const getPlayerPedId = (): number => PlayerPedId();
 
 const display = (): void => {
   if (_displaying) return;
+
+  if (!Permission.isAllowed(PERMISSIONS.MENU)) return;
 
   UI.display(UI_COMPONENT_NAME);
   UI.focus(true, true);
@@ -33,11 +37,16 @@ const minimize = (state: boolean): void => {
   UI.focus(true, true, state);
 };
 
+const getPermissions = (): string[] => {
+  return Permission.get();
+};
+
 const start = (): void => {
   _displaying = false;
 
   UI.register('menu:close', hide);
   UI.register('menu:minimize', minimize);
+  UI.register('menu:getPermissions', getPermissions);
 
   UI.register('menu:playerPedId', getPlayerPedId);
 

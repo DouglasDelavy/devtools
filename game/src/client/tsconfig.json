@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "types": ["@types/node", "@citizenfx/client"],
     "paths": {
+      "@shared/*": ["../shared/*"],
       "@modules/*": ["./modules/*"]
     }
   },

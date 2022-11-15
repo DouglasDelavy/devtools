@@ -1,10 +1,11 @@
-import { Debugger } from './modules/debugger';
-import { Menu } from './modules/menu';
-import { RunCode } from './modules/run-code';
-import { UI } from './modules/ui';
-import { Animation } from './modules/animation';
-import { Entity } from './modules/entity';
-import { World } from './modules/world';
+import { UI } from '@modules/ui';
+import { Permission } from '@modules/permission';
+import { Debugger } from '@modules/debugger';
+import { Menu } from '@modules/menu';
+import { RunCode } from '@modules/run-code';
+import { Animation } from '@modules/animation';
+import { Entity } from '@modules/entity';
+import { World } from '@modules/world';
 
 const RESOURCE_NAME = GetCurrentResourceName();
 
@@ -12,6 +13,7 @@ let _tick: number;
 
 setTimeout(() => {
   UI.start();
+  Permission.start();
 
   Debugger.start();
   RunCode.start();
@@ -34,11 +36,13 @@ on('onResourceStop', (resourceName: string) => {
     _tick = undefined;
   }
 
-  UI.shutdown();
   RunCode.shutdown();
   Debugger.shutdown();
   Menu.shutdown();
   Animation.shutdown();
   Entity.shutdown();
   World.shutdown();
+
+  Permission.shutdown();
+  UI.shutdown();
 });

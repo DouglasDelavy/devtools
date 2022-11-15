@@ -1,6 +1,9 @@
-import { Log } from '@modules/logger';
 import { UI } from '@modules/ui';
+import { Log } from '@modules/logger';
 import { Settings } from '@modules/settings';
+import { Permission } from '@modules/permission';
+
+import { PERMISSIONS } from '@shared/permission';
 
 const UI_RESOURCE_NAME = 'debugger';
 const KVP_RESOURCE_KEY = 'debugger';
@@ -56,6 +59,8 @@ const hide = (): void => {
 
 const display = (): void => {
   if (_displaying) return;
+
+  if (!Permission.isAllowed(PERMISSIONS.DEBUGGER)) return;
 
   _displaying = true;
 

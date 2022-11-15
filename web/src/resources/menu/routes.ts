@@ -3,6 +3,8 @@ import { AnimationScreen } from './screens/animation';
 import { ConsoleScreen } from './screens/console';
 import { WorldScreen } from './screens/world';
 
+import { PERMISSIONS } from './permissions';
+
 import { ReactComponent as EntityScreenIcon } from '../../assets/icons/entity.svg';
 import { ReactComponent as AnimationScreenIcon } from '../../assets/icons/animation.svg';
 import { ReactComponent as TerminalScreenIcon } from '../../assets/icons/terminal.svg';
@@ -14,23 +16,27 @@ export const routes = [
     label: 'Entity',
     icon: EntityScreenIcon,
     component: EntityScreen,
+    permissions: [PERMISSIONS.ENTITY_MENU],
   },
   {
     path: 'world',
     label: 'World',
     icon: WorldScreenIcon,
     component: WorldScreen,
+    permissions: [PERMISSIONS.WORLD_MENU],
   },
   {
     path: 'animation',
     label: 'Animation',
     icon: AnimationScreenIcon,
     component: AnimationScreen,
+    permissions: [PERMISSIONS.ANIMATION_MENU],
   },
   {
     path: 'console',
     label: 'Console',
     icon: TerminalScreenIcon,
     component: ConsoleScreen,
+    permissions: [PERMISSIONS.CONSOLE_MENU],
   },
 ];

@@ -1,6 +1,8 @@
-import { useLocalStorage } from '@lib/hooks/local-storage';
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
+
+import { isDevelopment } from '@lib/env';
 import { fetchNui } from '@lib/nui';
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { useLocalStorage } from '@lib/hooks/local-storage';
 
 const MENU_MAXIMIZE_STORAGE_KEY = 'menu:maximize';
 
@@ -12,6 +14,7 @@ type MenuContextData = {
   toggleMaximize: () => void;
 
   handleClose: () => void;
+  isAllowed: (permission: string[] | string) => boolean;
 
   path: string | undefined;
   setPath: (path: string) => void;
@@ -32,6 +35,7 @@ export const MenuContextProvider = ({ children }: MenuContextProviderProps) => {
   const [minimize, setMinimize] = useState(false);
 
   const [path, setPath] = useState<string>();
+  const [permissions, setPermissions] = useState<string[]>([]);
 
   const toggleMinimize = (): void => {
     const state = !minimize;
@@ -48,8 +52,43 @@ export const MenuContextProvider = ({ children }: MenuContextProviderProps) => {
     fetchNui('menu:close').catch(console.error);
   };
 
+  const isAllowed = useCallback(
+    (permission: string[] | string): boolean => {
+      // Wrapper for dev mode have all access
+      if (isDevelopment()) return true;
+
+      if (Array.isArray(permission)) {
+        return permissions.some(perm => permission.includes(perm));
+      }
+
+      return permissions.includes(permission);
+    },
+    [permissions],
+  );
+
+  useEffect(() => {
+    fetchNui<string[]>('menu:getPermissions')
+      .then(result => {
+        if (!result) return;
+
+        setPermissions(result);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
-    <MenuContext.Provider value={{ maximize, toggleMaximize, minimize, toggleMinimize, handleClose, path, setPath }}>
+    <MenuContext.Provider
+      value={{
+        maximize,
+        toggleMaximize,
+        minimize,
+        toggleMinimize,
+        handleClose,
+        isAllowed,
+        path,
+        setPath,
+      }}
+    >
       {children}
     </MenuContext.Provider>
   );
