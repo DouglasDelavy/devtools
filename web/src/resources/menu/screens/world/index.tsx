@@ -6,6 +6,7 @@ import { Restricted } from '../../components/restricted';
 import { WorldDensity } from './components/density';
 import { WorldTime } from './components/time';
 import { WorldWeather } from './components/weather';
+import { WorldTimecycle } from './components/timecycle';
 
 export const WorldScreen = () => {
   return (
@@ -25,6 +26,12 @@ export const WorldScreen = () => {
       <Restricted to={PERMISSIONS.WORLD_TIME}>
         <Accordion title="Time">
           <WorldTime />
+        </Accordion>
+      </Restricted>
+
+      <Restricted to={PERMISSIONS.WORLD_TIMECYCLE}>
+        <Accordion title="Timecycle">
+          <WorldTimecycle />
         </Accordion>
       </Restricted>
     </div>

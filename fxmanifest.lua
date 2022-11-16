@@ -7,6 +7,7 @@ server_script 'dist/server.js'
 
 files {
     'data/animations.json',
+    'data/timecycle.json',
     'dist/ui/**/*',
 }
 
