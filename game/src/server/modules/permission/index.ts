@@ -3,6 +3,7 @@ import { Log } from '@modules/logger';
 import { PERMISSIONS } from '@shared/permission';
 
 const PERMISSION_ENABLED_CONVAR = 'sv_devtools_permissions';
+const LATENT_CLIENT_EVENT_BYTES_PER_SECONDS = 5000;
 
 const _permissions = Object.values(PERMISSIONS);
 
@@ -20,7 +21,12 @@ const setPermissionsForPlayer = (playerServerId: number): void => {
   const playerServerIdAsString = playerServerId.toString();
   const permissions = _permissions.filter(permission => isPlayerAllowed(playerServerIdAsString, permission));
 
-  emitNet('devtools:client:setPermissions', playerServerId, permissions);
+  TriggerLatentClientEvent(
+    'devtools:client:setPermissions',
+    playerServerId,
+    LATENT_CLIENT_EVENT_BYTES_PER_SECONDS,
+    permissions,
+  );
 };
 
 const onRequestPermission = (): void => {
