@@ -14,6 +14,34 @@ type Animation = {
   animations: string[];
 };
 
+const ANIMATIONS_FLAGS = [
+  {
+    name: 'None',
+    value: 0,
+    disabled: true,
+  },
+  {
+    name: 'Loop',
+    value: 1,
+  },
+  {
+    name: 'StayInEndFrame',
+    value: 2,
+  },
+  {
+    name: 'UpperBodyOnly',
+    value: 16,
+  },
+  {
+    name: 'Secondary',
+    value: 32,
+  },
+  {
+    name: 'RagdollOnCollision',
+    value: 4194304,
+  },
+];
+
 export const AnimationScreen = () => {
   const [animations, setAnimations] = useState<Animation[]>();
 
@@ -106,7 +134,7 @@ export const AnimationScreen = () => {
   };
 
   return (
-    <section className="w-full h-full flex flex-col justify-between gap-2">
+    <section className="w-full h-full flex flex-col justify-between gap-2 overflow-auto">
       <div className="flex flex-col gap-2">
         <SearchInput placeholder="Search" value={search} onChange={handleChangeSearch} />
 
@@ -132,36 +160,30 @@ export const AnimationScreen = () => {
           />
         </div>
 
-        <div className="flex gap-2 flex-wrap">
-          <CheckBox label="None" value={0} checked={true} disabled />
-          <CheckBox label="Loop" value={1} checked={(flags & 1) !== 0} onChange={handleChangeFlags} />
-          <CheckBox label="StayInEndFrame" value={2} checked={(flags & 2) !== 0} onChange={handleChangeFlags} />
-          <CheckBox label="UpperBodyOnly" value={16} checked={(flags & 16) !== 0} onChange={handleChangeFlags} />
-          <CheckBox label="AllowRotation" value={32} checked={(flags & 32) !== 0} onChange={handleChangeFlags} />
-          <CheckBox
-            label="CancelableWithMovement"
-            value={128}
-            checked={(flags & 128) !== 0}
-            onChange={handleChangeFlags}
-          />
-          <CheckBox
-            label="RagdollOnCollision"
-            value={4194304}
-            checked={(flags & 4194304) !== 0}
-            onChange={handleChangeFlags}
-          />
-        </div>
-
         <div className="flex gap-2 items-center">
           <Button onClick={handlePlayAnimation}>Play</Button>
           <Button onClick={handleStopAnimation}>Stop</Button>
         </div>
+
+        <div className="flex gap-2 flex-wrap ">
+          {ANIMATIONS_FLAGS.map(animFlag => (
+            <CheckBox
+              label={animFlag.name}
+              value={animFlag.value}
+              disabled={animFlag.disabled}
+              checked={(flags & animFlag.value) !== 0}
+              onChange={handleChangeFlags}
+            />
+          ))}
+        </div>
       </div>
 
-      <TextArea
-        rows={7}
-        defaultValue={JSON.stringify({ name, dictionary, blendInSpeed, blendOutSpeed, flags }, null, 4)}
-      />
+      <div className="flex">
+        <TextArea
+          rows={7}
+          defaultValue={JSON.stringify({ name, dictionary, blendInSpeed, blendOutSpeed, flags }, null, 4)}
+        />
+      </div>
     </section>
   );
 };
