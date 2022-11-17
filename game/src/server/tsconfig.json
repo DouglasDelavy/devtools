@@ -9,7 +9,8 @@
     "types": ["@types/node", "@citizenfx/server"],
     "paths": {
       "@shared/*": ["../shared/*"],
-      "@modules/*": ["./modules/*"]
+      "@modules/*": ["./modules/*"],
+      "@utils/*": ["./utils/*"]
     }
   },
   "include": ["./"]

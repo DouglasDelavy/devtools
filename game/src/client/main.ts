@@ -6,6 +6,7 @@ import { RunCode } from '@modules/run-code';
 import { Animation } from '@modules/animation';
 import { Entity } from '@modules/entity';
 import { World } from '@modules/world';
+import { Vehicle } from '@modules/vehicle';
 
 const RESOURCE_NAME = GetCurrentResourceName();
 
@@ -21,6 +22,7 @@ setTimeout(() => {
   Animation.start();
   Entity.start();
   World.start();
+  Vehicle.start();
 
   _tick = setTick(() => {
     Debugger.tick();
@@ -42,6 +44,7 @@ on('onResourceStop', (resourceName: string) => {
   Animation.shutdown();
   Entity.shutdown();
   World.shutdown();
+  Vehicle.shutdown();
 
   Permission.shutdown();
   UI.shutdown();

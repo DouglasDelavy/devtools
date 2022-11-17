@@ -12,4 +12,7 @@ export const PERMISSIONS = {
 
   ANIMATION_MENU: 'devtools:menu:animation',
   CONSOLE_MENU: 'devtools:menu:console',
+
+  VEHICLE_MENU: 'devtools:menu:vehicle',
+  VEHICLE_CREATE: 'devtools:vehicle:create',
 };

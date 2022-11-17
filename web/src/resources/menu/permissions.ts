@@ -1,4 +1,7 @@
 export const PERMISSIONS = {
+  MENU: 'devtools:menu',
+  DEBUGGER: 'devtools:debugger',
+
   ENTITY_MENU: 'devtools:menu:entity',
 
   WORLD_MENU: 'devtools:menu:world',
@@ -9,4 +12,7 @@ export const PERMISSIONS = {
 
   ANIMATION_MENU: 'devtools:menu:animation',
   CONSOLE_MENU: 'devtools:menu:console',
+
+  VEHICLE_MENU: 'devtools:menu:vehicle',
+  VEHICLE_CREATE: 'devtools:vehicle:create',
 };

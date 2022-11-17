@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 type SelectOption = {
   value: string;
   label: string;
@@ -8,12 +10,13 @@ type SelectProps = {
   options: SelectOption[];
 } & React.SelectHTMLAttributes<HTMLSelectElement>;
 
-export const Select = ({ options, label, ...rest }: SelectProps) => {
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(({ options, label, ...rest }, ref) => {
   return (
     <div className="w-full flex flex-col gap-1">
       {label && <label className="text-sm font-medium text-neutral-400">{label}</label>}
 
       <select
+        ref={ref}
         className="w-full p-1 bg-neutral-700 text-neutral-300 text-sm rounded-sm focus:ring-neutral-500 focus:border-neutral-500"
         {...rest}
       >
@@ -27,4 +30,4 @@ export const Select = ({ options, label, ...rest }: SelectProps) => {
       </select>
     </div>
   );
-};
+});

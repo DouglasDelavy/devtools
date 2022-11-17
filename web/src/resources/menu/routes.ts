@@ -9,6 +9,8 @@ import { ReactComponent as EntityScreenIcon } from '../../assets/icons/entity.sv
 import { ReactComponent as AnimationScreenIcon } from '../../assets/icons/animation.svg';
 import { ReactComponent as TerminalScreenIcon } from '../../assets/icons/terminal.svg';
 import { ReactComponent as WorldScreenIcon } from '../../assets/icons/world.svg';
+import { ReactComponent as VehicleScreenIcon } from '../../assets/icons/vehicle.svg';
+import { VehicleScreen } from './screens/vehicle';
 
 export const routes = [
   {
@@ -17,6 +19,13 @@ export const routes = [
     icon: EntityScreenIcon,
     component: EntityScreen,
     permissions: [PERMISSIONS.ENTITY_MENU],
+  },
+  {
+    path: 'vehicle',
+    label: 'Vehicle',
+    icon: VehicleScreenIcon,
+    component: VehicleScreen,
+    permissions: [PERMISSIONS.VEHICLE_MENU],
   },
   {
     path: 'world',

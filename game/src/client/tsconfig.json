@@ -6,10 +6,11 @@
     "module": "commonjs",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "types": ["@types/node", "@citizenfx/client"],
+    "types": ["@types/node", "@citizenfx/client", "../shared/types/"],
     "paths": {
       "@shared/*": ["../shared/*"],
-      "@modules/*": ["./modules/*"]
+      "@modules/*": ["./modules/*"],
+      "@utils/*": ["./utils/*"]
     }
   },
   "include": ["./"]
