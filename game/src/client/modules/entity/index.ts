@@ -11,12 +11,26 @@ const setAlpha = ({ entity, alpha }): void => {
   SetEntityAlpha(entity, alpha, false);
 };
 
+const deleteEntity = (entity: number): void => {
+  if (!DoesEntityExist(entity) || entity === PlayerPedId()) return;
+
+  if (!NetworkGetEntityIsNetworked(entity)) {
+    SetEntityAsMissionEntity(entity, false, true);
+
+    DeleteEntity(entity);
+  } else {
+    emitNet('devtools:server:deleteEntity', NetworkGetNetworkIdFromEntity(entity));
+  }
+};
+
 const start = (): void => {
   EntityTransform.start();
   EntityPhysics.start();
 
   UI.register('entity:getAlpha', getAlpha);
   UI.register('entity:setAlpha', setAlpha);
+
+  UI.register('entity:delete', deleteEntity);
 };
 
 const shutdown = (): void => {

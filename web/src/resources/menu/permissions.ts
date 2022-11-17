@@ -3,6 +3,7 @@ export const PERMISSIONS = {
   DEBUGGER: 'devtools:debugger',
 
   ENTITY_MENU: 'devtools:menu:entity',
+  ENTITY_DELETE: 'devtools:entity:delete',
 
   WORLD_MENU: 'devtools:menu:world',
   WORLD_DENSITY: 'devtools:menu:world:density',
