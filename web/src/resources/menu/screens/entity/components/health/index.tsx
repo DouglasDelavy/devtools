@@ -1,9 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 
-import { fetchNui } from '@lib/nui';
+import { isDevelopment } from '@lib/env';
+import { addFetchMock, fetchNui } from '@lib/nui';
 import { Input } from '@lib/components/input';
 
 import { useEntityContext } from '../../context';
+
+if (isDevelopment()) {
+  addFetchMock('entity:getHealth', () => 200);
+  addFetchMock('entity:getMaxHealth', () => 200);
+}
 
 export const EntityHealth = () => {
   const { entity } = useEntityContext();

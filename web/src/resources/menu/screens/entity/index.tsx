@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { fetchNui } from '@lib/nui';
+import { isDevelopment } from '@lib/env';
+import { addFetchMock, fetchNui } from '@lib/nui';
 import { Input } from '@lib/components/input';
 import { Accordion } from '@lib/components/accordion';
 import { Button } from '@lib/components/button';
@@ -16,6 +17,13 @@ import { EntityTransform } from './components/transform';
 import { EntityPhysics } from './components/physics';
 import { EntityHealth } from './components/health';
 import { EntityLod } from './components/lod';
+
+if (isDevelopment()) {
+  addFetchMock('menu:playerPedId', () => 128);
+  addFetchMock('entity:getFreeze', () => false);
+  addFetchMock('entity:getVisible', () => true);
+  addFetchMock('entity:getCollision', () => false);
+}
 
 export const EntityScreen = () => {
   const [entity, setEntity] = useState(0);

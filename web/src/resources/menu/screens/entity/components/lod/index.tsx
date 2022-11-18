@@ -1,9 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 
-import { fetchNui } from '@lib/nui';
+import { isDevelopment } from '@lib/env';
+import { addFetchMock, fetchNui } from '@lib/nui';
 import { Input } from '@lib/components/input';
 
 import { useEntityContext } from '../../context';
+
+if (isDevelopment()) {
+  addFetchMock('entity:getLodDistance', () => 10);
+}
 
 export const EntityLod = () => {
   const { entity } = useEntityContext();

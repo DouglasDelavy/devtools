@@ -3,9 +3,14 @@ import { useEffect, useMemo, useState } from 'react';
 import { Input } from '@lib/components/input';
 import { Select } from '@lib/components/select';
 
-import { fetchFile, fetchNui } from '@lib/nui';
+import { isDevelopment } from '@lib/env';
+import { addFetchMock, fetchFile, fetchNui } from '@lib/nui';
 
 const DEFAULT_TIMECYCLE_STRENGTH = 1.0;
+
+if (isDevelopment()) {
+  addFetchMock('data/timecycle.json', () => ['cinema', 'cinema2']);
+}
 
 export const WorldTimecycle = () => {
   const [timecycles, setTimecycles] = useState<string[]>([]);

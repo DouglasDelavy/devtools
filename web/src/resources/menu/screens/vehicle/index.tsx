@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { fetchNui } from '@lib/nui';
+import { isDevelopment } from '@lib/env';
+import { addFetchMock, fetchNui } from '@lib/nui';
 import { Input } from '@lib/components/input';
 import { Accordion } from '@lib/components/accordion';
 import { Button } from '@lib/components/button';
@@ -10,6 +11,10 @@ import { PERMISSIONS } from '../../permissions';
 
 import { VehicleCreate } from './components/create';
 import { VehicleContext } from './context';
+
+if (isDevelopment()) {
+  addFetchMock('vehicle:getPedIsIn', () => 1);
+}
 
 export const VehicleScreen = () => {
   const [vehicle, setVehicle] = useState(0);

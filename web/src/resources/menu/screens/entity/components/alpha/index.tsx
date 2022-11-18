@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import { fetchNui } from '@lib/nui';
+import { isDevelopment } from '@lib/env';
+import { addFetchMock, fetchNui } from '@lib/nui';
 import { NumberInput } from '@lib/components/number-input';
 
 import { useEntityContext } from '../../context';
+
+if (isDevelopment()) {
+  addFetchMock('entity:getAlpha', () => 255);
+}
 
 export const EntityAlpha = () => {
   const { entity } = useEntityContext();

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { fetchFile, fetchNui } from '@lib/nui';
+import { isDevelopment } from '@lib/env';
+import { addFetchMock, fetchFile, fetchNui } from '@lib/nui';
 
 import { Button } from '@lib/components/button';
 import { Select } from '@lib/components/select';
@@ -41,6 +42,11 @@ const ANIMATIONS_FLAGS = [
     value: 4194304,
   },
 ];
+
+if (isDevelopment()) {
+  addFetchMock('menu:playerPedId', () => 1);
+  addFetchMock('data/animations.json', () => []);
+}
 
 export const AnimationScreen = () => {
   const [animations, setAnimations] = useState<Animation[]>();

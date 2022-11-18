@@ -1,11 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { fetchNui } from '@lib/nui';
+import { isDevelopment } from '@lib/env';
+import { addFetchMock, fetchNui } from '@lib/nui';
 
 import { Select } from '@lib/components/select';
 import { CheckBox } from '@lib/components/checkbox';
 import { Button } from '@lib/components/button';
+
 import { useVehicleContext } from '../../context';
+
+if (isDevelopment()) {
+  addFetchMock('vehicle:getModels', () => ['bati', 'kuruma']);
+}
 
 export const VehicleCreate = () => {
   const { setVehicle } = useVehicleContext();

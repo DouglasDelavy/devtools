@@ -1,8 +1,9 @@
 import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 
 import { isDevelopment } from '@lib/env';
-import { fetchNui } from '@lib/nui';
+import { addFetchMock, fetchNui } from '@lib/nui';
 import { useLocalStorage } from '@lib/hooks/local-storage';
+import { PERMISSIONS } from './permissions';
 
 const MENU_MAXIMIZE_STORAGE_KEY = 'menu:maximize';
 
@@ -23,6 +24,10 @@ type MenuContextData = {
 type MenuContextProviderProps = {
   children: ReactNode;
 };
+
+if (isDevelopment()) {
+  addFetchMock('menu:getPermissions', () => Object.values(PERMISSIONS).filter(x => x !== PERMISSIONS.ENTITY_DELETE));
+}
 
 const MenuContext = createContext({} as MenuContextData);
 
@@ -54,9 +59,6 @@ export const MenuContextProvider = ({ children }: MenuContextProviderProps) => {
 
   const isAllowed = useCallback(
     (permission: string[] | string): boolean => {
-      // Wrapper for dev mode have all access
-      if (isDevelopment()) return true;
-
       if (Array.isArray(permission)) {
         return permissions.some(perm => permission.includes(perm));
       }
