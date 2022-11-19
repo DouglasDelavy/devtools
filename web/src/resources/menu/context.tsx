@@ -26,7 +26,7 @@ type MenuContextProviderProps = {
 };
 
 if (isDevelopment()) {
-  addFetchMock('menu:getPermissions', () => Object.values(PERMISSIONS).filter(x => x !== PERMISSIONS.ENTITY_DELETE));
+  addFetchMock('menu:getPermissions', () => Object.values(PERMISSIONS));
 }
 
 const MenuContext = createContext({} as MenuContextData);

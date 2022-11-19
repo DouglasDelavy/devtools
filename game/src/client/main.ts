@@ -7,6 +7,7 @@ import { Animation } from '@modules/animation';
 import { Entity } from '@modules/entity';
 import { World } from '@modules/world';
 import { Vehicle } from '@modules/vehicle';
+import { Teleport } from '@modules/teleport';
 
 const RESOURCE_NAME = GetCurrentResourceName();
 
@@ -23,6 +24,7 @@ setTimeout(() => {
   Entity.start();
   World.start();
   Vehicle.start();
+  Teleport.start();
 
   _tick = setTick(() => {
     Debugger.tick();
@@ -45,6 +47,7 @@ on('onResourceStop', (resourceName: string) => {
   Entity.shutdown();
   World.shutdown();
   Vehicle.shutdown();
+  Teleport.shutdown();
 
   Permission.shutdown();
   UI.shutdown();

@@ -2,6 +2,8 @@ import { EntityScreen } from './screens/entity';
 import { AnimationScreen } from './screens/animation';
 import { ConsoleScreen } from './screens/console';
 import { WorldScreen } from './screens/world';
+import { VehicleScreen } from './screens/vehicle';
+import { TeleportScreen } from './screens/teleport';
 
 import { PERMISSIONS } from './permissions';
 
@@ -10,7 +12,7 @@ import { ReactComponent as AnimationScreenIcon } from '../../assets/icons/animat
 import { ReactComponent as TerminalScreenIcon } from '../../assets/icons/terminal.svg';
 import { ReactComponent as WorldScreenIcon } from '../../assets/icons/world.svg';
 import { ReactComponent as VehicleScreenIcon } from '../../assets/icons/vehicle.svg';
-import { VehicleScreen } from './screens/vehicle';
+import { ReactComponent as TeleportScreenIcon } from '../../assets/icons/teleport.svg';
 
 export const routes = [
   {
@@ -33,6 +35,13 @@ export const routes = [
     icon: WorldScreenIcon,
     component: WorldScreen,
     permissions: [PERMISSIONS.WORLD_MENU],
+  },
+  {
+    path: 'teleport',
+    label: 'Teleport',
+    icon: TeleportScreenIcon,
+    component: TeleportScreen,
+    permissions: [PERMISSIONS.TELEPORT_MENU],
   },
   {
     path: 'animation',

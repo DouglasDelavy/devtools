@@ -11,11 +11,13 @@
     "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.6.0"
+    "react-icons": "^4.6.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/uuid": "^8.3.4",
     "@vitejs/plugin-react": "^2.0.1",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.18",
@@ -27,4 +29,3 @@
     "vite-tsconfig-paths": "^3.5.2"
   }
 }
-
