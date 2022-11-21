@@ -8,6 +8,7 @@ import { Entity } from '@modules/entity';
 import { World } from '@modules/world';
 import { Vehicle } from '@modules/vehicle';
 import { Teleport } from '@modules/teleport';
+import { Freecam } from '@modules/freecam';
 
 const RESOURCE_NAME = GetCurrentResourceName();
 
@@ -25,10 +26,12 @@ setTimeout(() => {
   World.start();
   Vehicle.start();
   Teleport.start();
+  Freecam.start();
 
   _tick = setTick(() => {
     Debugger.tick();
     World.tick();
+    Freecam.tick();
   });
 }, 0);
 
@@ -48,6 +51,7 @@ on('onResourceStop', (resourceName: string) => {
   World.shutdown();
   Vehicle.shutdown();
   Teleport.shutdown();
+  Freecam.shutdown();
 
   Permission.shutdown();
   UI.shutdown();

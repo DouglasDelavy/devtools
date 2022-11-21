@@ -21,4 +21,6 @@ export const PERMISSIONS = {
   TELEPORT_TO_COORDS: 'devtools:teleport:coords',
   TELEPORT_TO_WAYPOINT: 'devtools:teleport:waypoint',
   TELEPORT_ITEMS: 'devtools:teleport:items',
+
+  NOCLIP: 'devtools:noclip',
 };

@@ -7,8 +7,8 @@
     "watch:server": "esbuild src/server/main.ts --outfile=../dist/server.js --bundle --watch --format=cjs --platform=node",
     "watch": "concurrently --names \"client,server\" \"yarn run watch:client\" \"yarn run watch:server\"",
     "start": "yarn run watch",
-    "build:client": "esbuild src/client/main.ts --outfile=../dist/client.js --bundle --minify --format=cjs",
-    "build:server": "esbuild src/server/main.ts --outfile=../dist/server.js --bundle --minify --format=cjs --platform=node",
+    "build:client": "esbuild src/client/main.ts --outfile=../dist/client.js --bundle --format=cjs",
+    "build:server": "esbuild src/server/main.ts --outfile=../dist/server.js --bundle --format=cjs --platform=node",
     "build": "concurrently --names \"client,server\" \"yarn run build:client\" \"yarn run build:server\""
   },
   "devDependencies": {
@@ -21,5 +21,8 @@
     "esbuild": "^0.15.1",
     "eslint": "^8.21.0",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "gl-matrix": "^3.4.3"
   }
 }

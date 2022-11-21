@@ -6,6 +6,7 @@ import { loadColisionAroundEntity } from '@utils/collision';
 
 import { parseJSON } from '@shared/utils/parse';
 import { generate } from '@shared/utils/snowflake';
+import { Freecam } from '@modules/freecam';
 
 const TELEPORT_ITEMS_KVP_KEY = 'devtools:teleport:items';
 
@@ -67,7 +68,11 @@ const teleportEntityWithSafeMode = async (entity: number, position: number[]): P
 };
 
 const teleportEntityWithoutSafeMode = (entity: number, position: number[]): void => {
-  SetEntityCoords(entity, position[0], position[1], position[2], false, false, false, true);
+  if (Freecam.isActive()) {
+    Freecam.setPosition(position[0], position[1], position[2]);
+  } else {
+    SetEntityCoords(entity, position[0], position[1], position[2], false, false, false, true);
+  }
 };
 
 const teleport = (position: number[], safeMode = false): void => {
