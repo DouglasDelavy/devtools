@@ -5,6 +5,8 @@ import { parseFloatArray } from '@lib/utils/parser';
 import { Button } from '@lib/components/button';
 import { Input } from '@lib/components/input';
 
+import { useMenuContext } from '../../../context';
+
 type SaveTeleportModalProps = {
   open: boolean;
   onClose: () => void;
@@ -12,6 +14,8 @@ type SaveTeleportModalProps = {
 };
 
 export const SaveTeleportModal = ({ open, onClose, onSubmit }: SaveTeleportModalProps) => {
+  const { maximize } = useMenuContext();
+
   const nameInputRef = useRef<HTMLInputElement>(null);
   const coordsInputRef = useRef<HTMLInputElement>(null);
 
@@ -43,10 +47,15 @@ export const SaveTeleportModal = ({ open, onClose, onSubmit }: SaveTeleportModal
   return open ? (
     <div className="absolute inset-0 p-10 w-screen h-screen flex justify-end">
       <div
-        className="w-1/4 flex items-center justify-center bg-neutral-900 bg-opacity-75 transition-opacity"
+        className={`${
+          maximize ? 'w-1/4' : 'w-full'
+        } flex items-center justify-center bg-neutral-900 bg-opacity-75 transition-opacity`}
         onClick={handleClose}
       >
-        <div className="w-10/12 p-2 bg-neutral-800 flex flex-col gap-2" onClick={e => e.stopPropagation()}>
+        <div
+          className={`${maximize ? 'w-10/12' : 'w-1/4'} p-2 bg-neutral-800 flex flex-col gap-2`}
+          onClick={e => e.stopPropagation()}
+        >
           <Input ref={nameInputRef} type="text" label="Name" />
           <Input ref={coordsInputRef} type="text" label="Coords" />
 
