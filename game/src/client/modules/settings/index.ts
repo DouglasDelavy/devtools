@@ -25,7 +25,7 @@ const setFloat = (key: string, value: number): void => {
 };
 
 const getBool = (key: string): boolean => {
-  const value = getInt(`${PREFIX}:${key}`);
+  const value = getInt(key);
 
   return Boolean(value);
 };
