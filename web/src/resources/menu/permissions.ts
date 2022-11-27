@@ -23,4 +23,6 @@ export const PERMISSIONS = {
   TELEPORT_ITEMS: 'devtools:teleport:items',
 
   NOCLIP: 'devtools:noclip',
+
+  TRACKER: 'devtools:tracker',
 };

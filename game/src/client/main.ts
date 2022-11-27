@@ -9,6 +9,7 @@ import { World } from '@modules/world';
 import { Vehicle } from '@modules/vehicle';
 import { Teleport } from '@modules/teleport';
 import { Freecam } from '@modules/freecam';
+import { Tracking } from '@modules/tracking';
 
 const RESOURCE_NAME = GetCurrentResourceName();
 
@@ -27,11 +28,13 @@ setTimeout(() => {
   Vehicle.start();
   Teleport.start();
   Freecam.start();
+  Tracking.start();
 
   _tick = setTick(() => {
     Debugger.tick();
     World.tick();
     Freecam.tick();
+    Tracking.tick();
   });
 }, 0);
 
@@ -52,6 +55,7 @@ on('onResourceStop', (resourceName: string) => {
   Vehicle.shutdown();
   Teleport.shutdown();
   Freecam.shutdown();
+  Tracking.shutdown();
 
   Permission.shutdown();
   UI.shutdown();
