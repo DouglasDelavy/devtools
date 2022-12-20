@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { isDevelopment } from '@lib/env';
 import { addFetchMock, fetchNui } from '@lib/nui';
 
-import { Select } from '@lib/components/select';
+import { SearchAutocomplete } from '@lib/components/search-autocomplete';
 import { CheckBox } from '@lib/components/checkbox';
 import { Button } from '@lib/components/button';
 
@@ -18,7 +18,7 @@ export const VehicleCreate = () => {
 
   const [models, setModels] = useState<string[]>([]);
 
-  const selectModelRef = useRef<HTMLSelectElement>(null);
+  const inputModelRef = useRef<HTMLInputElement>(null);
   const isDriverRef = useRef<HTMLInputElement>(null);
   const isNetworkedRef = useRef<HTMLInputElement>(null);
   const isScriptHostRef = useRef<HTMLInputElement>(null);
@@ -34,15 +34,15 @@ export const VehicleCreate = () => {
       .catch(console.error);
   }, []);
 
-  const selectOptions = useMemo(() => models.map(model => ({ value: model, label: model })), [models]);
+  const selectOptions = useMemo(() => models.map(model => ({ label: model })), [models]);
 
   const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
 
-    if (!selectModelRef.current?.value) return;
+    if (!inputModelRef.current?.value) return;
 
     const data = {
-      model: selectModelRef.current?.value,
+      model: inputModelRef.current?.value,
       inside: isDriverRef.current?.checked,
       isNetworked: isNetworkedRef.current?.checked,
       isScriptHost: isScriptHostRef.current?.checked,
@@ -60,7 +60,7 @@ export const VehicleCreate = () => {
 
   return (
     <form className="h-full flex py-2 flex-col gap-1" onSubmit={handleSubmit}>
-      <Select ref={selectModelRef} options={selectOptions} />
+      <SearchAutocomplete ref={inputModelRef} items={selectOptions} />
 
       <div className="py-2 flex flex-wrap gap-2">
         <CheckBox ref={isDriverRef} label="isDriver" />
