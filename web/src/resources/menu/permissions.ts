@@ -17,6 +17,9 @@ export const PERMISSIONS = {
   VEHICLE_MENU: 'devtools:menu:vehicle',
   VEHICLE_CREATE: 'devtools:vehicle:create',
 
+  SOUND_MENU: 'devtools:menu:sound',
+  PLAY_SOUND_FRONTEND: 'devtools:menu:sound:frontend',
+
   TELEPORT_MENU: 'devtools:menu:teleport',
   TELEPORT_TO_COORDS: 'devtools:teleport:coords',
   TELEPORT_TO_WAYPOINT: 'devtools:teleport:waypoint',

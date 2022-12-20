@@ -22,10 +22,11 @@ export type SearchAutocompleteProps = {
   items: SearchItem[];
   maxResults?: number;
   fuseOptions?: Fuse.IFuseOptions<unknown>;
+  onSelectSuggestion?: (value: string) => void;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export const SearchAutocomplete = forwardRef<HTMLInputElement, SearchAutocompleteProps>(
-  ({ items, maxResults = MAX_RESULTS, fuseOptions = DEFAULT_FUSE_OPTIONS, ...rest }, ref) => {
+  ({ items, onSelectSuggestion, maxResults = MAX_RESULTS, fuseOptions = DEFAULT_FUSE_OPTIONS, ...rest }, ref) => {
     const [value, setValue] = useState('');
     const [suggestions, setSuggestions] = useState<SearchItem[]>([]);
 
@@ -47,6 +48,10 @@ export const SearchAutocomplete = forwardRef<HTMLInputElement, SearchAutocomplet
     const handleSelectSuggestion = (suggestion: string): void => {
       setValue(suggestion);
       setSuggestions([]);
+
+      if (onSelectSuggestion) {
+        onSelectSuggestion(suggestion);
+      }
     };
 
     return (
