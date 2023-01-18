@@ -11,7 +11,11 @@ import {
 } from './shop';
 
 const PED_MODEL_TO_CHARACTER_TYPE = {
+  [GetHashKey('player_zero')]: 0,
+  [GetHashKey('player_one')]: 1,
+  [GetHashKey('player_two')]: 2,
   [GetHashKey('mp_m_freemode_01')]: 3,
+  [GetHashKey('mp_f_freemode_01')]: 4,
 };
 
 const setPedOutfit = (ped: number, outfit: Appearance.ShopPedOutfit): void => {
