@@ -11,6 +11,7 @@ import { Teleport } from '@modules/teleport';
 import { Freecam } from '@modules/freecam';
 import { Tracking } from '@modules/tracking';
 import { Sound } from '@modules/sounds';
+import { Appearance } from '@modules/appearance';
 
 const RESOURCE_NAME = GetCurrentResourceName();
 
@@ -31,6 +32,7 @@ setTimeout(() => {
   Freecam.start();
   Tracking.start();
   Sound.start();
+  Appearance.start();
 
   _tick = setTick(() => {
     Debugger.tick();
@@ -59,6 +61,7 @@ on('onResourceStop', (resourceName: string) => {
   Freecam.shutdown();
   Tracking.shutdown();
   Sound.shutdown();
+  Appearance.shutdown();
 
   Permission.shutdown();
   UI.shutdown();

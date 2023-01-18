@@ -1,7 +1,6 @@
 import { useState, ReactNode, HTMLAttributes } from 'react';
 
 import { ReactComponent as ArrowRightIcon } from '../../../assets/icons/arrow_right.svg';
-import { ReactComponent as ArrowDownIcon } from '../../../assets/icons/arrow_down.svg';
 
 type AccordionProps = {
   title: string;

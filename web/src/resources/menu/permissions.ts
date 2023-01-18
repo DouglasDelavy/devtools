@@ -20,6 +20,9 @@ export const PERMISSIONS = {
   SOUND_MENU: 'devtools:menu:sound',
   PLAY_SOUND_FRONTEND: 'devtools:menu:sound:frontend',
 
+  APPEARANCE: 'devtools:appearance',
+  APPEARANCE_OUTFITS: 'devtools:appearance:outfits',
+
   TELEPORT_MENU: 'devtools:menu:teleport',
   TELEPORT_TO_COORDS: 'devtools:teleport:coords',
   TELEPORT_TO_WAYPOINT: 'devtools:teleport:waypoint',

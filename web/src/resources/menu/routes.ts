@@ -5,6 +5,7 @@ import { WorldScreen } from './screens/world';
 import { VehicleScreen } from './screens/vehicle';
 import { TeleportScreen } from './screens/teleport';
 import { SoundScreen } from './screens/sound';
+import { AppearanceScreen } from './screens/appearance';
 
 import { PERMISSIONS } from './permissions';
 
@@ -15,6 +16,7 @@ import { ReactComponent as SoundScreenIcon } from '../../assets/icons/sound.svg'
 import { ReactComponent as WorldScreenIcon } from '../../assets/icons/world.svg';
 import { ReactComponent as VehicleScreenIcon } from '../../assets/icons/vehicle.svg';
 import { ReactComponent as TeleportScreenIcon } from '../../assets/icons/teleport.svg';
+import { ReactComponent as AppearanceScreenIcon } from '../../assets/icons/outfit.svg';
 
 export const routes = [
   {
@@ -65,5 +67,12 @@ export const routes = [
     icon: TerminalScreenIcon,
     component: ConsoleScreen,
     permissions: [PERMISSIONS.CONSOLE_MENU],
+  },
+  {
+    path: 'appearance',
+    label: 'Appearance',
+    icon: AppearanceScreenIcon,
+    component: AppearanceScreen,
+    permissions: [PERMISSIONS.APPEARANCE],
   },
 ];
