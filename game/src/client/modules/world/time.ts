@@ -3,8 +3,13 @@ import { UI } from '../ui';
 let _time: World.ClockTime;
 let _freezed: boolean;
 
-const setTime = ({ hours, minutes, seconds }: World.ClockTime): void => {
-  NetworkOverrideClockTime(hours, minutes, seconds);
+const setTime = (time: World.ClockTime): void => {
+  if (_freezed) {
+    _time = time;
+    return;
+  }
+
+  NetworkOverrideClockTime(time.hours, time.minutes, time.seconds);
 };
 
 const freezeTime = (state: boolean): void => {
@@ -15,7 +20,7 @@ const freezeTime = (state: boolean): void => {
 const freezeTick = (): void => {
   if (!_freezed) return;
 
-  setTime(_time);
+  NetworkOverrideClockTime(_time.hours, _time.minutes, _time.seconds);
 };
 
 const start = (): void => {
