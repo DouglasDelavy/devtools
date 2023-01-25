@@ -6,7 +6,7 @@ import { Button } from '@lib/components/button';
 import { DumpOutfitModal } from './dump-outfit-modal';
 
 export const Outfits = () => {
-  const [outfitIndex, setOutfitIndex] = useState(0);
+  const [outfitIndex, setOutfitIndex] = useState(-1);
   const [outfits, setOutfits] = useState<Appearance.ShopPedOutfit[]>([]);
   const [isDumpOutfitModalOpen, setIsDumpOutfitModalOpen] = useState(false);
 
@@ -44,7 +44,7 @@ export const Outfits = () => {
     <div className="flex flex-col gap-2 pb-1">
       <ArrowInput
         label={outfit?.textLabel || 'Unknown'}
-        min={0}
+        min={-1}
         max={outfits.length - 1}
         onChange={handleChangeOutfit}
       />

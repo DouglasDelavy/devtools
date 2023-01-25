@@ -108,7 +108,7 @@ export const EntityScreen = () => {
         </Accordion>
 
         <Accordion title="Alpha">
-          <EntityAlpha />w
+          <EntityAlpha />
         </Accordion>
 
         <Accordion title="Physics">

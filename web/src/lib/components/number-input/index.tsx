@@ -36,7 +36,7 @@ export const NumberInput = ({
   };
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    changeValue(parseFloat(e.target.value));
+    changeValue(parseFloat(e.target.value) || 0);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
