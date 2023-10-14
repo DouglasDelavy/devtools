@@ -22,6 +22,7 @@ export const PERMISSIONS = {
 
   APPEARANCE: 'devtools:appearance',
   APPEARANCE_OUTFITS: 'devtools:appearance:outfits',
+  APPEARANCE_TATTOOS: 'devtools:appearance:tattoos',
 
   TELEPORT_MENU: 'devtools:menu:teleport',
   TELEPORT_TO_COORDS: 'devtools:teleport:coords',

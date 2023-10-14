@@ -48,4 +48,15 @@ declare namespace Appearance {
     unk3: number;
     textLabel: string;
   };
+
+  type ShopPedTattoo = {
+    unk1: number;
+    unk2: number;
+    tattooCollectionHash: number;
+    tattooNameHash: number;
+    unk3: number;
+    zoneId: number;
+    unk4: number;
+    textLabel: string;
+  };
 }

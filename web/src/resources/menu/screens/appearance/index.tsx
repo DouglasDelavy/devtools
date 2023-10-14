@@ -4,6 +4,7 @@ import { Restricted } from '../../components/restricted';
 import { PERMISSIONS } from '../../permissions';
 
 import { Outfits } from './components/outfits';
+import { Tattoos } from './components/tattoos';
 
 export const AppearanceScreen = () => {
   return (
@@ -11,6 +12,12 @@ export const AppearanceScreen = () => {
       <Restricted to={PERMISSIONS.APPEARANCE_OUTFITS}>
         <Accordion title="Outfits">
           <Outfits />
+        </Accordion>
+      </Restricted>
+
+      <Restricted to={PERMISSIONS.APPEARANCE_TATTOOS}>
+        <Accordion title="Tattoos">
+          <Tattoos />
         </Accordion>
       </Restricted>
     </div>

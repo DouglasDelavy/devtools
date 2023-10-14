@@ -70,4 +70,15 @@ declare namespace Appearance {
     enumValue: number;
     componentType: number;
   };
+
+  type ShopPedTattoo = {
+    unk1: number;
+    unk2: number;
+    tattooCollectionHash: number;
+    tattooNameHash: number;
+    unk3: number;
+    zoneId: number;
+    unk4: number;
+    textLabel: string;
+  };
 }

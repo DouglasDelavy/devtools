@@ -37,7 +37,7 @@ export const App = () => {
   return (
     <>
       <div
-        className={`w-screen h-screen ${
+        className={`w-screen h-screen flex items-center justify-center ${
           isDevelopment() ? "bg-[url('../assets/images/background.jpg')] bg-cover bg-center" : ''
         } `}
       >

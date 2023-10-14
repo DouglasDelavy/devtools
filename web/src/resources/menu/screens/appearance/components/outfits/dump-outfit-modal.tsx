@@ -39,6 +39,20 @@ export const DumpOutfitModal = ({ outfitHash, open, onClose }: DumpOutfitModalPr
     onClose();
   };
 
+  const data = {
+    components: outfit?.components.map(component => ({
+      component_id: component.eCompType,
+      drawable: component.drawableIndex,
+      texture: component.textureIndex,
+    })),
+
+    props: outfit?.props.map(prop => ({
+      prop_id: prop.eAnchorPoint,
+      drawable: prop.propIndex,
+      texture: prop.textureIndex,
+    })),
+  };
+
   return open ? (
     <div className="absolute inset-0 p-10 w-screen h-screen flex justify-end">
       <div
@@ -51,7 +65,7 @@ export const DumpOutfitModal = ({ outfitHash, open, onClose }: DumpOutfitModalPr
           className={`${maximize ? 'w-10/12' : 'w-2/4'} p-2 bg-neutral-800 flex flex-col gap-2`}
           onClick={e => e.stopPropagation()}
         >
-          <TextArea rows={20} defaultValue={JSON.stringify(outfit, null, 2)} />
+          <TextArea rows={20} defaultValue={JSON.stringify(data, null, 2)} />
 
           <div className="flex gap-2 justify-end">
             <Button onClick={handleClose}>Close</Button>
