@@ -69,10 +69,26 @@ const getModels = (): string[] => {
   return GetAllVehicleModels();
 };
 
+const createVehicleCommand = async (_source: number, args: string[]): Promise<void> => {
+  const model = args[0] || 'adder';
+
+  const playerPed = PlayerPedId();
+  const heading = GetEntityHeading(playerPed);
+  const position = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 5.0, 0.0);
+
+  const vehicleHandle = await create({ model, position, heading, isNetworked: true, isScriptHost: true });
+
+  if (DoesEntityExist(vehicleHandle)) {
+    SetPedIntoVehicle(playerPed, vehicleHandle, -1);
+  }
+};
+
 const start = (): void => {
   UI.register('vehicle:getPedIsIn', getVehiclePedIsIn);
   UI.register('vehicle:getModels', getModels);
   UI.register('vehicle:create', onCreate);
+
+  RegisterCommand('create_vehicle', createVehicleCommand, false);
 };
 
 const shutdown = (): void => {
