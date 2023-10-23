@@ -9,6 +9,7 @@ files {
     'data/animations.json',
     'data/timecycle.json',
     'data/sounds.json',
+    'data/peds.json',
     'dist/ui/**/*',
 }
 

@@ -5,10 +5,17 @@ import { PERMISSIONS } from '../../permissions';
 
 import { Outfits } from './components/outfits';
 import { Tattoos } from './components/tattoos';
+import { PlayerModel } from './components/model';
 
 export const AppearanceScreen = () => {
   return (
     <div className="w-full flex flex-col gap-2">
+      <Restricted to={PERMISSIONS.APPEARANCE_MODEL}>
+        <Accordion title="Model">
+          <PlayerModel />
+        </Accordion>
+      </Restricted>
+
       <Restricted to={PERMISSIONS.APPEARANCE_OUTFITS}>
         <Accordion title="Outfits">
           <Outfits />

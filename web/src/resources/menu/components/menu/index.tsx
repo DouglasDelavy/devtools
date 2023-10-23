@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { twMerge } from 'tailwind-merge';
+
 import { useMenuContext } from '../../context';
 import { routes } from '../../routes';
 
@@ -28,9 +30,11 @@ export const Menu = () => {
 
   return (
     <div
-      className={`h-full ${maximize ? 'w-1/4' : 'w-full'} flex-col flex duration-300 bg-neutral-900 text-white ${
-        minimize ? 'opacity-50' : 'opacity-100'
-      }`}
+      className={twMerge(
+        'h-full flex-col flex duration-300 bg-neutral-900 text-white',
+        maximize ? 'w-1/4' : 'w-full',
+        minimize ? 'w-1/4 opacity-50' : 'opacity-100',
+      )}
     >
       <Header />
 

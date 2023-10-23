@@ -21,6 +21,7 @@ export const PERMISSIONS = {
   PLAY_SOUND_FRONTEND: 'devtools:menu:sound:frontend',
 
   APPEARANCE: 'devtools:appearance',
+  APPEARANCE_MODEL: 'devtools:appearance:model',
   APPEARANCE_OUTFITS: 'devtools:appearance:outfits',
   APPEARANCE_TATTOOS: 'devtools:appearance:tattoos',
 

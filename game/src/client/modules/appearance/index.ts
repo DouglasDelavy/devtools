@@ -1,4 +1,6 @@
 import { UI } from '@modules/ui';
+import { loadModel } from '@utils/model';
+
 import { Decorations } from './decorations';
 import { Outfits } from './outfits';
 
@@ -40,11 +42,22 @@ const onClearAllPedComponents = (): void => {
   clearAllPedComponents(playerPed);
 };
 
+const onSetPlayerModel = async (model: string): Promise<void> => {
+  const playerId = PlayerId();
+  const modelHash = GetHashKey(model);
+
+  await loadModel(modelHash);
+
+  SetPlayerModel(playerId, modelHash);
+  SetPedDefaultComponentVariation(PlayerPedId());
+};
+
 const start = (): void => {
   Outfits.start();
   Decorations.start();
 
   UI.register('appearance:clearPedComponents', onClearAllPedComponents);
+  UI.register('appearance:model', onSetPlayerModel);
 };
 
 const shutdown = (): void => {
