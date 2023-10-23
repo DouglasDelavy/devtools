@@ -3,6 +3,9 @@ import { loadModel } from '@utils/model';
 
 import { Decorations } from './decorations';
 import { Outfits } from './outfits';
+import { Cameras } from './cameras';
+import { Components } from './components';
+import { Props } from './props';
 
 export const DEFAULT_PED_COMPONENTS = [
   { id: 1, drawable: 0, texture: 0 },
@@ -55,12 +58,18 @@ const onSetPlayerModel = async (model: string): Promise<void> => {
 const start = (): void => {
   Outfits.start();
   Decorations.start();
+  Cameras.start();
+  Components.start();
+  Props.start();
 
   UI.register('appearance:clearPedComponents', onClearAllPedComponents);
   UI.register('appearance:model', onSetPlayerModel);
 };
 
 const shutdown = (): void => {
+  Props.shutdown();
+  Components.shutdown();
+  Cameras.shutdown();
   Decorations.shutdown();
   Outfits.shutdown();
 };

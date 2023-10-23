@@ -22,6 +22,8 @@ export const PERMISSIONS = {
 
   APPEARANCE: 'devtools:appearance',
   APPEARANCE_MODEL: 'devtools:appearance:model',
+  APPEARANCE_COMPONENTS: 'devtools:appearance:components',
+  APPEARANCE_PROPS: 'devtools:appearance:props',
   APPEARANCE_OUTFITS: 'devtools:appearance:outfits',
   APPEARANCE_TATTOOS: 'devtools:appearance:tattoos',
 

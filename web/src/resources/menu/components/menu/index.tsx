@@ -38,7 +38,7 @@ export const Menu = () => {
     >
       <Header />
 
-      <section className="flex flex-row flex-grow overflow-auto">
+      <section className="flex flex-row flex-grow overflow-hidden">
         <SideBar maximized={maximize} />
 
         <main className="w-[calc(100%-16.666667%)] h-full flex flex-col p-2">{Component && <Component />}</main>

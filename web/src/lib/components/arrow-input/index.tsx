@@ -4,7 +4,7 @@ import { ReactComponent as SmallArrowRightIcon } from '../../../assets/icons/sma
 import { ReactComponent as SmallArrowLeftIcon } from '../../../assets/icons/small_arrow_left.svg';
 
 type ArrowInputProps = {
-  label: string;
+  label?: string;
 
   onChange: (value: number) => void;
 
