@@ -4,21 +4,39 @@ import { fetchNui } from '@lib/nui';
 import { ArrowInput } from '@lib/components/arrow-input';
 import { Button } from '@lib/components/button';
 
-const TATTOOS_ZONES = {
-  torso: 0,
-  head: 1,
-  leftArm: 2,
-  rightArm: 3,
-  leftLeg: 4,
-  rightLeg: 5,
-  unknown: 6,
-  none: 7,
-};
+const TATTOOS_ZONES = [
+  { id: 0, label: 'Torso' },
+  { id: 1, label: 'Head' },
+  { id: 2, label: 'Left Arm' },
+  { id: 3, label: 'Right Arm' },
+  { id: 4, label: 'Left Leg' },
+  { id: 5, label: 'Right Leg' },
+  { id: 6, label: 'Unknown' },
+  { id: 7, label: 'None' },
+];
 
 export const Tattoos = () => {
   const [tattoos, setTattoos] = useState<Record<number, Appearance.ShopPedTattoo[]>>();
+  const [currentTattooIndex, setCurrentTattooIndex] = useState(0);
 
-  const handleApply = (zone: number, index: number): void => {
+  const handleSetTattoo = (zone: number, index: number): void => {
+    if (!tattoos) return;
+
+    const tattoosInZone = tattoos[zone];
+    if (!tattoosInZone) return;
+
+    const tattoo = tattoosInZone[index];
+    if (!tattoo) return;
+
+    setCurrentTattooIndex(index);
+
+    fetchNui('appearance:setTattoo', {
+      collectionHash: tattoo.tattooCollectionHash,
+      nameHash: tattoo.tattooNameHash,
+    }).catch(console.error);
+  };
+
+  const handleApplyTattoo = (zone: number, index: number): void => {
     if (!tattoos) return;
 
     const tattoosInZone = tattoos[zone];
@@ -59,61 +77,18 @@ export const Tattoos = () => {
     <div className="flex flex-col gap-2 pb-1">
       {tattoos && (
         <div>
-          <ArrowInput
-            label="Torso"
-            min={0}
-            max={tattoos[TATTOOS_ZONES.torso]?.length - 1}
-            onChange={value => handleApply(TATTOOS_ZONES.torso, value)}
-          />
+          {TATTOOS_ZONES.map(zone => (
+            <div className="flex items-end gap-2">
+              <ArrowInput
+                label={zone.label}
+                min={0}
+                max={tattoos[zone.id]?.length - 1}
+                onChange={value => handleSetTattoo(zone.id, value)}
+              />
 
-          <ArrowInput
-            label="Head"
-            min={0}
-            max={tattoos[TATTOOS_ZONES.head]?.length - 1}
-            onChange={value => handleApply(TATTOOS_ZONES.head, value)}
-          />
-
-          <ArrowInput
-            label="Left Arm"
-            min={0}
-            max={tattoos[TATTOOS_ZONES.leftArm]?.length - 1}
-            onChange={value => handleApply(TATTOOS_ZONES.leftArm, value)}
-          />
-
-          <ArrowInput
-            label="Right Arm"
-            min={0}
-            max={tattoos[TATTOOS_ZONES.rightArm]?.length - 1}
-            onChange={value => handleApply(TATTOOS_ZONES.rightArm, value)}
-          />
-
-          <ArrowInput
-            label="Left Leg"
-            min={0}
-            max={tattoos[TATTOOS_ZONES.leftLeg]?.length - 1}
-            onChange={value => handleApply(TATTOOS_ZONES.leftLeg, value)}
-          />
-
-          <ArrowInput
-            label="Right Leg"
-            min={0}
-            max={tattoos[TATTOOS_ZONES.rightLeg]?.length - 1}
-            onChange={value => handleApply(TATTOOS_ZONES.rightLeg, value)}
-          />
-
-          <ArrowInput
-            label="Unknowk"
-            min={0}
-            max={tattoos[TATTOOS_ZONES.unknown]?.length - 1}
-            onChange={value => handleApply(TATTOOS_ZONES.unknown, value)}
-          />
-
-          <ArrowInput
-            label="None"
-            min={0}
-            max={tattoos[TATTOOS_ZONES.none]?.length - 1}
-            onChange={value => handleApply(TATTOOS_ZONES.none, value)}
-          />
+              <Button onClick={() => handleApplyTattoo(zone.id, currentTattooIndex)}>Apply</Button>
+            </div>
+          ))}
         </div>
       )}
 

@@ -11,6 +11,17 @@ declare namespace Appearance {
     texture: number;
   };
 
+  type Decoration = {
+    collectionHash: string | number;
+    nameHash: string | number;
+  };
+
+  type PedAppearance = {
+    components: Component[];
+    props: Prop[];
+    decorations: Decoration[];
+  };
+
   type Outfit = {
     hash: number;
     lockHash: number;

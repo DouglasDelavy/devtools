@@ -1,11 +1,14 @@
 import { UI } from '@modules/ui';
 import { loadModel } from '@utils/model';
+import { parseJSON } from '@shared/utils/parse';
 
 import { Decorations } from './decorations';
 import { Outfits } from './outfits';
 import { Cameras } from './cameras';
 import { Components } from './components';
 import { Props } from './props';
+
+const SAVE_APPEARANCE_KVP_KEY = 'devtools:appearance';
 
 export const DEFAULT_PED_COMPONENTS = [
   { id: 1, drawable: 0, texture: 0 },
@@ -55,6 +58,47 @@ const onSetPlayerModel = async (model: string): Promise<void> => {
   SetPedDefaultComponentVariation(PlayerPedId());
 };
 
+const onSaveAppearance = (): void => {
+  const playerPed = PlayerPedId();
+  const playerPedModel = GetEntityModel(playerPed);
+
+  const components = Components.getPedComponents(playerPed);
+  const props = Props.getPedProps(playerPed);
+  const decorations = Decorations.getPedDecorations();
+
+  const appearanceKey = `${SAVE_APPEARANCE_KVP_KEY}:${playerPedModel}`;
+  const appearance: Appearance.PedAppearance = { components, props, decorations };
+
+  SetResourceKvp(appearanceKey, JSON.stringify(appearance));
+};
+
+const onRemoveSavedAppearance = (): void => {
+  const playerPed = PlayerPedId();
+  const playerPedModel = GetEntityModel(playerPed);
+
+  const appearanceKey = `${SAVE_APPEARANCE_KVP_KEY}:${playerPedModel}`;
+
+  DeleteResourceKvp(appearanceKey);
+};
+
+const applySavedAppearance = (): void => {
+  const playerPed = PlayerPedId();
+  const playerPedModel = GetEntityModel(playerPed);
+
+  const appearanceKey = `${SAVE_APPEARANCE_KVP_KEY}:${playerPedModel}`;
+  const appearanceData = GetResourceKvpString(appearanceKey);
+  const appearance = parseJSON<Appearance.PedAppearance>(appearanceData);
+  if (!appearance) return;
+
+  Components.setPedComponents(playerPed, appearance.components);
+  Props.setPedProps(playerPed, appearance.props);
+  Decorations.setPedDecorations(playerPed, appearance.decorations);
+};
+
+const onPlayerSpawned = (): void => {
+  applySavedAppearance();
+};
+
 const start = (): void => {
   Outfits.start();
   Decorations.start();
@@ -64,9 +108,16 @@ const start = (): void => {
 
   UI.register('appearance:clearPedComponents', onClearAllPedComponents);
   UI.register('appearance:model', onSetPlayerModel);
+
+  UI.register('appearance:save', onSaveAppearance);
+  UI.register('appearance:deleteSave', onRemoveSavedAppearance);
+
+  on('playerSpawned', onPlayerSpawned);
 };
 
 const shutdown = (): void => {
+  removeEventListener('playerSpawned', onPlayerSpawned);
+
   Props.shutdown();
   Components.shutdown();
   Cameras.shutdown();

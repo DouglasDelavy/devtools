@@ -13,6 +13,25 @@ const getPedComponentName = (ped: number, componentId: number, drawable: number,
   return GetLabelText(shopComponent.textLabel);
 };
 
+const getPedComponents = (ped: number): Appearance.Component[] => {
+  const components: Appearance.Component[] = [];
+
+  COMPONENTS.forEach(id => {
+    const drawable = GetPedDrawableVariation(ped, id);
+    const texture = GetPedTextureVariation(ped, id);
+
+    components.push({ id, drawable, texture });
+  });
+
+  return components;
+};
+
+const setPedComponents = (ped: number, components: Appearance.Component[]): void => {
+  components.forEach(component =>
+    SetPedComponentVariation(ped, component.id, component.drawable, component.texture, 0),
+  );
+};
+
 const onGetComponents = () => {
   const playerPed = PlayerPedId();
   const components = [];
@@ -51,4 +70,7 @@ const shutdown = (): void => {
 export const Components = {
   start,
   shutdown,
+
+  getPedComponents,
+  setPedComponents,
 };

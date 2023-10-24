@@ -1,4 +1,6 @@
+import { fetchNui } from '@lib/nui';
 import { Accordion } from '@lib/components/accordion';
+import { Button } from '@lib/components/button';
 
 import { Restricted } from '../../components/restricted';
 import { PERMISSIONS } from '../../permissions';
@@ -11,9 +13,22 @@ import { Cameras } from './components/cameras';
 import { Props } from './components/props';
 
 export const AppearanceScreen = () => {
+  const handleSaveAppearance = (): void => {
+    fetchNui('appearance:save').catch(console.error);
+  };
+
+  const handleDeleteSavedAppearance = (): void => {
+    fetchNui('appearance:deleteSave').catch(console.error);
+  };
+
   return (
-    <div className="w-full flex flex-col gap-2 overflow-hidden">
+    <div className="w-full h-full flex flex-col gap-2 overflow-hidden">
       <Cameras />
+
+      <div className="flex gap-2">
+        <Button onClick={handleSaveAppearance}>Save</Button>
+        <Button onClick={handleDeleteSavedAppearance}>Delete</Button>
+      </div>
 
       <div className="flex flex-col gap-2 overflow-auto">
         <Restricted to={PERMISSIONS.APPEARANCE_MODEL}>

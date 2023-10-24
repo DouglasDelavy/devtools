@@ -14,6 +14,23 @@ const getPedPropName = (ped: number, propId: number, drawable: number, texture: 
   return GetLabelText(shopProp.textLabel);
 };
 
+const getPedProps = (ped: number): Appearance.Prop[] => {
+  const props: Appearance.Prop[] = [];
+
+  PROPS.forEach(id => {
+    const drawable = GetPedPropIndex(ped, id);
+    const texture = GetPedPropTextureIndex(ped, id);
+
+    props.push({ id, drawable, texture });
+  });
+
+  return props;
+};
+
+const setPedProps = (ped: number, props: Appearance.Prop[]): void => {
+  props.forEach(prop => SetPedPropIndex(ped, prop.id, prop.drawable, prop.texture, false));
+};
+
 const onGetProps = () => {
   const playerPed = PlayerPedId();
   const components = [];
@@ -56,4 +73,7 @@ const shutdown = (): void => {
 export const Props = {
   start,
   shutdown,
+
+  getPedProps,
+  setPedProps,
 };
