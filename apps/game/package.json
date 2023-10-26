@@ -1,0 +1,23 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node scripts/build.js --watch",
+    "build": "pnpm run lint && pnpm run check && node scripts/build.js --build",
+    "check": "tsc --p src/client/tsconfig.json --noEmit && tsc --p src/server/tsconfig.json --noEmit",
+    "lint": "eslint . --ext .ts"
+  },
+  "devDependencies": {
+    "@citizenfx/client": "^2.0.5801-1",
+    "@citizenfx/server": "^2.0.5801-1",
+    "@types/node": "^18.7.1",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "esbuild": "^0.15.1",
+    "eslint": "^8.21.0"
+  },
+  "dependencies": {
+    "gl-matrix": "^3.4.3"
+  }
+}

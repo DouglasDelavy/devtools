@@ -24,7 +24,7 @@ const update = (): void => {
   const playerPedArmor = GetPedArmour(playerPed);
   const playerPedSpeed = GetEntitySpeed(playerPed);
   const playerPedModel = GetEntityModel(playerPed);
-  const [_, playerPedWeapon] = GetCurrentPedWeapon(playerPed, true);
+  const [, playerPedWeapon] = GetCurrentPedWeapon(playerPed, true);
 
   const playerPedPos = GetEntityCoords(playerPed, false);
   const playerPedRot = GetEntityRotation(playerPed, 2);

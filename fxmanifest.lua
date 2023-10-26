@@ -1,16 +1,20 @@
-fx_version "cerulean"
-game { "gta5" }
+fx_version 'cerulean'
+game { 'gta5' }
 
-client_script 'dist/client.js'
-
-server_script 'dist/server.js'
+author 'Oddo'
+description 'Devtools designed to speed up your development.'
 
 files {
+    'dist/ui/**/*',
+
     'data/animations.json',
     'data/timecycle.json',
     'data/sounds.json',
     'data/peds.json',
-    'dist/ui/**/*',
 }
 
 ui_page 'dist/ui/index.html'
+
+client_script 'dist/client.js'
+
+server_script 'dist/server.js'

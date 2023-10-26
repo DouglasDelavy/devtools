@@ -10,7 +10,7 @@ const KVP_RESOURCE_KEY = 'tracker';
 const DISTANCE_TO_TRACK_ENTITY = 10.0;
 
 const TEXT_ENTRY_KEY = 'TRACKED_OBJECT_TEXT';
-const TEXT_ENTRY_TEXT = 'Entity: ~1~ ~n~ Model: ~1~ ~n~ Network: ~a~ ~n~ Mission Entity: ~a~ ~n~ Visible: ~a~';
+const TEXT_ENTRY_TEXT = 'Entity: ~1~ ~n~ Model: ~1~ ~n~ Archetype: ~a~ ~n~ Network: ~a~ ~n~ Mission Entity: ~a~';
 
 let _displaying: boolean;
 let _trackedObjects: Set<number>;
@@ -52,6 +52,9 @@ const drawTrackedObjectsTick = (): void => {
 
       const model = GetEntityModel(entity);
       AddTextComponentInteger(model);
+
+      const archetype = GetEntityArchetypeName(entity);
+      AddTextComponentString(archetype);
 
       const isNetwork = String(NetworkGetEntityIsNetworked(entity));
       AddTextComponentString(isNetwork);

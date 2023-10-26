@@ -1,14 +1,14 @@
 {
   "name": "devtools",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "build:game": "cd game && npm install && npm run build",
-    "build:web": "cd web && npm install && npm run build",
-    "build": "npm run build:game && npm run build:web",
-    "watch:game": "cd game && npm run watch",
-    "watch:web": "cd web && npm run dev",
-    "watch": "npm run watch:game && npm run watch:web"
+    "build": "pnpm --filter \"./apps/**\" run build",
+    "dev": "pnpm --filter \"./apps/**\" run dev"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   }
 }
+

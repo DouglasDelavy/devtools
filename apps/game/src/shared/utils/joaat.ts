@@ -1,8 +1,8 @@
 export const joaat = (key: string): number => {
-  const skey = key.toLowerCase() as any;
+  const skey = key.toLowerCase();
   const hash = new Uint32Array(1);
 
-  for (const i in skey) {
+  for (let i = 0; i < skey.length; ++i) {
     hash[0] += skey.charCodeAt(i);
     hash[0] += hash[0] << 10;
     hash[0] ^= hash[0] >>> 6;
