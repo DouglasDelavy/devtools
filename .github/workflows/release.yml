@@ -41,6 +41,7 @@ jobs:
         run: |
           mkdir -p ./temp/devtools
           cp ./{README.md,fxmanifest.lua} ./temp/devtools/
+          cp -r ./data ./temp/devtools/data
           cp -r ./dist/ ./temp/devtools/dist
           cd ./temp && zip -r ../devtools.zip ./devtools
 
