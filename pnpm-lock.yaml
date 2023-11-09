@@ -20,13 +20,16 @@ importers:
       gl-matrix:
         specifier: ^3.4.3
         version: 3.4.3
+      xmlbuilder:
+        specifier: ^15.1.1
+        version: 15.1.1
     devDependencies:
       '@citizenfx/client':
-        specifier: ^2.0.5801-1
-        version: 2.0.5801-1
+        specifier: ^2.0.7080-1
+        version: 2.0.7080-1
       '@citizenfx/server':
-        specifier: ^2.0.5801-1
-        version: 2.0.5801-1
+        specifier: ^2.0.7080-1
+        version: 2.0.7080-1
       '@types/node':
         specifier: ^18.7.1
         version: 18.18.7
@@ -51,6 +54,9 @@ importers:
       fuse.js:
         specifier: ^6.6.2
         version: 6.6.2
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -67,6 +73,9 @@ importers:
         specifier: ^9.0.0
         version: 9.0.1
     devDependencies:
+      '@types/lodash':
+        specifier: ^4.14.201
+        version: 4.14.201
       '@types/react':
         specifier: ^18.0.17
         version: 18.2.33
@@ -378,12 +387,12 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@citizenfx/client@2.0.5801-1:
-    resolution: {integrity: sha512-WdTDzN4q0nTcF0nQcxqBQ4wiYjWUnQYsaHdretYe1Iy8C5Xr/2iIZPfCN4pjZmI26WeJepl9tq38vLl2E3kAlQ==}
+  /@citizenfx/client@2.0.7080-1:
+    resolution: {integrity: sha512-xPfKcXalIqignRSATArDkTIBZ780NYhkMfA+OXbTXlxj2UgTUk0hLYUjp3U1M3cVPQvK7OusNT7maat56ce0Hw==}
     dev: true
 
-  /@citizenfx/server@2.0.5801-1:
-    resolution: {integrity: sha512-I8ttqSstQ9V9OqJwVl95lPQdTGptskz7OPHjn6e0hbOMX//2mYLa3iHh2HCpZH6b0Mzl86sKWxvJSd2q7gCC1Q==}
+  /@citizenfx/server@2.0.7080-1:
+    resolution: {integrity: sha512-U5neFDSN00b2A9w8P3JCJSyJ4TcosXrNw+IxnIqYkS0waLUFU+wHrrccARLT8So8SGqQ2D2RsEx6uEmefjiBxQ==}
     dev: true
 
   /@cush/relative@1.0.0:
@@ -661,6 +670,10 @@ packages:
 
   /@types/json-schema@7.0.14:
     resolution: {integrity: sha512-U3PUjAudAdJBeC2pgN8uTIKgxrb4nlDF3SF0++EldXQvQBGkpFZMSnwQiIoDU77tv45VgNkl/L4ouD+rEomujw==}
+    dev: true
+
+  /@types/lodash@4.14.201:
+    resolution: {integrity: sha512-y9euML0cim1JrykNxADLfaG0FgD1g/yTHwUs/Jg9ZIU7WKj2/4IW9Lbb1WZbvck78W/lfGXFfe+u2EGfIJXdLQ==}
     dev: true
 
   /@types/node@18.18.7:
@@ -1819,6 +1832,10 @@ packages:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
+  /lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: false
+
   /loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
@@ -2515,6 +2532,11 @@ packages:
   /wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
+
+  /xmlbuilder@15.1.1:
+    resolution: {integrity: sha512-yMqGBqtXyeN1e3TGYvgNgDVZ3j84W4cwkOXQswghol6APgZWaff9lnbvN7MHYJOiXsvGPXtjTYJEiC9J2wv9Eg==}
+    engines: {node: '>=8.0'}
+    dev: false
 
   /yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}

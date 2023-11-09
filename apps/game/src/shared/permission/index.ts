@@ -27,6 +27,8 @@ export const PERMISSIONS = {
   APPEARANCE_OUTFITS: 'devtools:appearance:outfits',
   APPEARANCE_TATTOOS: 'devtools:appearance:tattoos',
 
+  TIMECYCLE: 'devtools:timecycle',
+
   TELEPORT_MENU: 'devtools:menu:teleport',
   TELEPORT_TO_COORDS: 'devtools:teleport:coords',
   TELEPORT_TO_WAYPOINT: 'devtools:teleport:waypoint',

@@ -20,6 +20,10 @@ const register = (name: string, handler: (data: unknown) => unknown): void => {
   });
 };
 
+const unregister = (name: string): void => {
+  UnregisterRawNuiCallback(name);
+};
+
 const focus = (hasFocus: boolean, hasCursor: boolean, keepInput = false): void => {
   SetNuiFocus(hasFocus, hasCursor);
   SetNuiFocusKeepInput(keepInput);
@@ -41,6 +45,7 @@ export const UI = {
   display,
   hide,
   register,
+  unregister,
   emit,
   focus,
   start,

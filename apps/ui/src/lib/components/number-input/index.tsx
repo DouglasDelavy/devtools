@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { precision } from '@lib/utils/math';
 
 type NumberInputProps = {
-  label: string;
+  label?: string;
 
   value: number;
   onChange: (value: number) => void;
@@ -58,7 +58,7 @@ export const NumberInput = ({
   };
 
   const handleWheel = ({ deltaY }: React.WheelEvent<HTMLInputElement>) => {
-    changeValue(value + deltaY * 0.001);
+    changeValue(value - deltaY * 0.001);
   };
 
   return (

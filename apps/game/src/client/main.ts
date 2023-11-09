@@ -12,6 +12,7 @@ import { Freecam } from '@modules/freecam';
 import { Tracking } from '@modules/tracking';
 import { Sound } from '@modules/sounds';
 import { Appearance } from '@modules/appearance';
+import { Timecycle } from '@modules/timecycle';
 
 const RESOURCE_NAME = GetCurrentResourceName();
 
@@ -33,6 +34,7 @@ setTimeout(() => {
   Tracking.start();
   Sound.start();
   Appearance.start();
+  Timecycle.start();
 
   _tick = setTick(() => {
     Debugger.tick();
@@ -50,6 +52,7 @@ on('onResourceStop', (resourceName: string) => {
     _tick = undefined;
   }
 
+  Timecycle.shutdown();
   RunCode.shutdown();
   Debugger.shutdown();
   Menu.shutdown();

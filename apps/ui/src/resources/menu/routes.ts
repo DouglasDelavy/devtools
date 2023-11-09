@@ -17,6 +17,7 @@ import { ReactComponent as WorldScreenIcon } from '../../assets/icons/world.svg'
 import { ReactComponent as VehicleScreenIcon } from '../../assets/icons/vehicle.svg';
 import { ReactComponent as TeleportScreenIcon } from '../../assets/icons/teleport.svg';
 import { ReactComponent as AppearanceScreenIcon } from '../../assets/icons/outfit.svg';
+import { TimecycleScreen } from './screens/timecycle';
 
 export const routes = [
   {
@@ -74,5 +75,12 @@ export const routes = [
     icon: AppearanceScreenIcon,
     component: AppearanceScreen,
     permissions: [PERMISSIONS.APPEARANCE],
+  },
+  {
+    path: 'timecycle',
+    label: 'Timecycle',
+    icon: WorldScreenIcon,
+    component: TimecycleScreen,
+    permissions: [PERMISSIONS.TIMECYCLE],
   },
 ];
