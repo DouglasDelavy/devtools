@@ -43,7 +43,7 @@ export const PrintTimecycleModal = ({ open, onClose }: PrintTimecycleModalProps)
   }
 
   return (
-    <div className="absolute inset-0 w-screen h-screen flex justify-end">
+    <div className="w-full absolute inset-0 flex justify-end">
       <div className="w-full flex items-center justify-center p-10 bg-neutral-900 bg-opacity-75 transition-opacity">
         <div className="w-10/12 p-2 h-full flex flex-col gap-2 bg-neutral-800 rounded-md">
           <header className="flex justify-between bg-neutral-800">

@@ -5,14 +5,9 @@ import { addFetchMock, fetchNui } from '@lib/nui';
 import { useLocalStorage } from '@lib/hooks/local-storage';
 import { PERMISSIONS } from './permissions';
 
-const MENU_MAXIMIZE_STORAGE_KEY = 'menu:maximize';
-
 type MenuContextData = {
-  maximize: boolean;
-  toggleMinimize: () => void;
-
   minimize: boolean;
-  toggleMaximize: () => void;
+  toggleMinimize: () => void;
 
   handleClose: () => void;
   isAllowed: (permission: string[] | string) => boolean;
@@ -36,7 +31,6 @@ export const useMenuContext = (): MenuContextData => {
 };
 
 export const MenuContextProvider = ({ children }: MenuContextProviderProps) => {
-  const [maximize, setMaximize] = useLocalStorage(MENU_MAXIMIZE_STORAGE_KEY, true);
   const [minimize, setMinimize] = useState(false);
 
   const [path, setPath] = useState<string>();
@@ -47,10 +41,6 @@ export const MenuContextProvider = ({ children }: MenuContextProviderProps) => {
 
     setMinimize(state);
     fetchNui('menu:minimize', state).catch(console.error);
-  };
-
-  const toggleMaximize = (): void => {
-    setMaximize(state => !state);
   };
 
   const handleClose = (): void => {
@@ -81,8 +71,6 @@ export const MenuContextProvider = ({ children }: MenuContextProviderProps) => {
   return (
     <MenuContext.Provider
       value={{
-        maximize,
-        toggleMaximize,
         minimize,
         toggleMinimize,
         handleClose,

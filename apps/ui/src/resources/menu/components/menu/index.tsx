@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { useMenuContext } from '../../context';
@@ -10,15 +10,59 @@ import { SideBar } from '../sidebar';
 const CLOSE_KEYS = ['Escape'];
 
 export const Menu = () => {
-  const { handleClose, maximize, minimize, path } = useMenuContext();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const leftResizerRef = useRef<HTMLDivElement>(null);
+
+  const { handleClose, minimize, path } = useMenuContext();
 
   const Component = routes.find(route => route.path === path)?.component;
 
+  // Resizable
+  useEffect(() => {
+    const resizeableElement = containerRef.current;
+    if (!resizeableElement) return;
+
+    const resizeableStyles = getComputedStyle(resizeableElement);
+
+    let xCord = 0;
+    let width = parseInt(resizeableStyles.width, 10);
+
+    const onMouseMoveLeftResize = (event: MouseEvent) => {
+      if (!resizeableElement) return;
+
+      const dx = event.clientX - xCord;
+      xCord = event.clientX;
+      width = width - dx;
+      resizeableElement.style.width = `${width}px`;
+    };
+
+    const onMouseUpLeftResize = () => {
+      removeEventListener('mousemove', onMouseMoveLeftResize);
+    };
+
+    const onMouseDownLeftResize = (event: MouseEvent) => {
+      if (!resizeableElement) return;
+
+      xCord = event.clientX;
+      resizeableElement.style.right = resizeableStyles.right;
+
+      addEventListener('mousemove', onMouseMoveLeftResize);
+      addEventListener('mouseup', onMouseUpLeftResize);
+    };
+
+    leftResizerRef.current?.addEventListener('mousedown', onMouseDownLeftResize);
+
+    return () => {
+      leftResizerRef.current?.removeEventListener('mousedown', onMouseDownLeftResize);
+    };
+  }, []);
+
+  // Key down handler
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent): void => {
-      if (!CLOSE_KEYS.includes(event.key)) return;
-
-      handleClose();
+      if (CLOSE_KEYS.includes(event.key)) {
+        handleClose();
+      }
     };
 
     window.addEventListener('keydown', onKeyDown);
@@ -30,18 +74,20 @@ export const Menu = () => {
 
   return (
     <div
+      ref={containerRef}
       className={twMerge(
-        'h-full flex-col flex duration-300 bg-neutral-900 text-white',
-        maximize ? 'w-1/4' : 'w-full',
-        minimize ? 'w-1/4 opacity-50' : 'opacity-100',
+        'h-full min-w-[25rem] flex-col flex bg-neutral-900 text-white relative inset-0',
+        minimize ? 'opacity-50' : 'opacity-100',
       )}
     >
+      <div ref={leftResizerRef} className="w-5 h-full absolute cursor-col-resize left-0 top-0" />
+
       <Header />
 
       <section className="flex flex-row flex-grow overflow-hidden">
-        <SideBar maximized={maximize} />
+        <SideBar />
 
-        <main className="w-[calc(100%-16.666667%)] h-full flex flex-col p-2">{Component && <Component />}</main>
+        <main className="w-full h-full flex flex-col p-2">{Component && <Component />}</main>
       </section>
     </div>
   );
